@@ -45,11 +45,7 @@ h1{
 }
 
 /* HeaderCotizacion */
-.containerCotizacion{
-    /* width: 462px; */
-    /* background-color: red; */
-    /* text-align: center; */
-}
+
 .DatosNumberFecha{
     justify-content: space-between;
     display: flex;

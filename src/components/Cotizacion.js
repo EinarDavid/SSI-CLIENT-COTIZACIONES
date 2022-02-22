@@ -10,8 +10,7 @@ export const Cotizacion = ({setDatos }) => {
     const cliente = 'Ivar Carrasco';
     const responsable = 'Lorena Lopez';
 
-    const data = useFetchCotizacion(setDatos);
-    console.log(data);
+    
      
     // if(data.message){
     //     console.log('Hay mensaje')

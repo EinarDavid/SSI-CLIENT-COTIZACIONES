@@ -8,41 +8,41 @@ import './styles.css';
 
 export const BusquedaCotizacion = ({ defaultCategories = '' }) => {
 
-    const [number, setNumber] = useState('0');
+    const [number, setNumber] = useState('');
     const [search, setSearch] = useState(false);
-    
+    const [cotizaciones, setCotizaciones] = useState([])
+    const [detalle, setDetalle] = useState([])
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
-    
-    // if (setNumber != 0) {
-    //     console.log('es mayor')
-    //     // navigate('/cot/edit');
-    //     setSearch(true);
-    // }
-    // else {
-    //     console.log('No existe')
-    // }
+    // const data = useFetchCotizacion(number);
 
 
-    // const handleSubmit = async(e) => {
-    //     e.preventDefault();
-    //     // console.log(number)
 
-    //     if (number.trim().length > 2) {
-    //         const res = await fetch (`http://localhost:4000/ssiCotizacion/${number}`)
-    //         const data = await res.json();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(number)
 
-    //         console.log(data);
-    //         if(data[0].estado === 'true'){
-    //             const result = await fetch (`http://localhost:4000/ssiCotizacionDetalle/${number}`)
-    //             const detalle = await result.json();
-    //             console.log(detalle);
-    //         }
-    //         setNumber('');
-    //     }
-    // }
+        if (number.trim().length > 2) {
+            const res = await fetch(`http://localhost:4000/ssiCotizacion/${number}`)
+            const data = await res.json();
+            setCotizaciones(data);
 
+            console.log(data);
+            if (data[0].estado === 'true') {
+                const result = await fetch(`http://localhost:4000/ssiCotizacionDetalle/${number}`)
+                const resdetalle = await result.json();
+                console.log(resdetalle);
+                setDetalle(resdetalle)
+            }
+            setNumber('');
+        }
+
+    }
+
+    const handleChange = (e) => {
+        setNumber(e.target.value);
+    }
 
 
     return (
@@ -51,12 +51,34 @@ export const BusquedaCotizacion = ({ defaultCategories = '' }) => {
                 <h1>Cotizaciones</h1>
                 <div className='card-white'>
                     <div style={{ height: '40px' }}></div>
-                    <FormBusqueda setNumber={setNumber} />
+                    <div className='formInputSearch'>
+                        <form onSubmit={handleSubmit}>
+                            <input
+                                className='textInput'
+                                name='buscar'
+                                type='text'
+                                placeholder='Ingresa un número de cotización'
+                                onChange={handleChange}
+                                value={number}
+                            >
+                            </input>
+                            <button
+                                type='submit'
+                            >Enviar
+                            </button>
+                        </form>
+                    </div>
+                    {/* <FormBusqueda setNumber={setNumber} /> */}
                     <div style={{ height: '10px' }}></div>
                     {/* {search ? (<p>Si</p>) : (<p>No</p>)} */}
-                    <Cotizacion setDatos={number}/>
+                    {/* <Cotizacion setDatos={cotizaciones} /> */}
+                    {
+                        cotizaciones.map((cot) => (
+                            (cot.estado == 'false') ? (<p> Si</p>) : (<p>No</p>) 
 
-                    <p>{number}</p>
+                    ))
+                    }
+                    <p>{ }</p>
                 </div>
             </div>
 

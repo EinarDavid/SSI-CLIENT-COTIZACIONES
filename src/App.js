@@ -9,10 +9,15 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<BusquedaCotizacion />} />
-        <Route path='/cot/edit' element={<VistaCotizacion/>} />
+        <Route path='/cot/edit' element={<VistaCotizacion />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
+
+
+    // <>
+    //   <BusquedaCotizacion />
+    // </>
