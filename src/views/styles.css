@@ -1,0 +1,122 @@
+
+h1{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 34px;
+    line-height: 40px;
+    color: #2781B8;
+    text-align: center;
+
+}
+
+.container{
+    text-align: center;
+    margin-top: 60px;
+}
+
+.card-white{
+    /* width: 50%; */
+    width: 542px;
+    height: 450px;
+    margin-left: auto;
+    margin-right: auto;
+
+    background: #FFFFFF;
+    border-radius: 26px;
+}
+.formInputSearch{
+    text-align: center;
+    /* background-color: #2781B8; */
+}
+
+.textInput{
+    background: #EFF4F6;
+    border-radius: 10px;
+    width: 394px;
+    height: 40px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 18px;
+    padding-left: 20px;
+    border: none;
+}
+
+/* HeaderCotizacion */
+.containerCotizacion{
+    /* width: 462px; */
+    /* background-color: red; */
+    /* text-align: center; */
+}
+.DatosNumberFecha{
+    justify-content: space-between;
+    display: flex;
+    width: 462px;
+    /* background-color: aqua; */
+    margin-left: auto;
+    margin-right: auto;
+    /* height: 23px; */
+}
+.NumberCotizacion{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 23px;
+
+    color: #000000;
+}
+.FechaCreacion{
+    font-family: Roboto;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
+}
+
+.Title{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 15px;
+    color: #2781B8;
+    /* background-color: bisque; */
+}
+
+.Desctiption{
+    margin-top: -12px;
+    /* background-color: #2781B8; */
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
+}
+.containerDatos{
+    justify-content: space-between;
+    display: flex;
+    width: 462px;
+    /* background-color: gray; */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -5px;
+}
+.Cliente{
+    /* background-color: blueviolet; */
+    width: 196px;
+    height: 34px;  
+}
+.Responsable{
+    width: 196px;
+    /* background-color: red; */
+    height: 34px; 
+}
+.Horas{
+    width: 51.86px;
+    height: 34px; 
+ }
