@@ -36,9 +36,8 @@ export const FormBusqueda = ({ setNumber }) => {
                     value={inputValue}
                 >
                 </input>
-                <button
-                    type='submit'
-                >Enviar
+                <button className='search_button' type='submit'>
+                    Env
                 </button>
             </form>
         </div>

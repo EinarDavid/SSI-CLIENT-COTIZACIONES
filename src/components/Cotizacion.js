@@ -38,7 +38,26 @@ export const Cotizacion = ({setDatos }) => {
                     <p className='Desctiption'>Falta</p>
                 </div>
             </div>
-            
+            <div className='titulo_tabla'>
+
+            </div>
+            <div className='wrapper_table_row'>
+                <input
+                    className='inputTable'
+                    type='text'
+                    value='Ivar Carrasco'
+                    disabled
+                >
+                </input>
+
+                <input
+                    className='inputTable'
+                    type='text'
+                    value='Ivar Carrasco'
+                    disabled
+                >
+                </input>
+                </div>
         </div>
     )
 }

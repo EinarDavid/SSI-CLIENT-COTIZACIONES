@@ -12,6 +12,7 @@ h1{
     color: #2781B8;
     text-align: center;
     margin: 0;
+    margin-bottom: 20px;
 
 }
 
@@ -33,7 +34,7 @@ h1{
 .card-white{
     /* width: 50%; */
     width: 542px;
-    height: 450px;
+    height: 560px;
     margin-left: auto;
     margin-right: auto;
     
@@ -43,6 +44,24 @@ h1{
 .formInputSearch{
     text-align: center;
     /* background-color: #2781B8; */
+}
+
+.search_button{
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 0;
+    margin-left: 10px;
+    color: #FFFFFF;
+    background-color: #2781B8;
+}
+
+.search_button:hover{
+    background-color: #28709d;
+}
+
+.search_button:active{
+    background-color: #28709d;
 }
 
 .textInput{
@@ -80,7 +99,7 @@ h1{
     font-weight: normal;
     font-size: 20px;
     line-height: 23px;
-
+    margin: 0;
     color: #000000;
 }
 .FechaCreacion{
@@ -89,6 +108,7 @@ h1{
     font-weight: normal;
     font-size: 15px;
     line-height: 18px;
+    margin: 0;
     color: #000000;
 }
 
@@ -99,11 +119,13 @@ h1{
     font-size: 13px;
     line-height: 15px;
     color: #2781B8;
+    margin: 0;
     /* background-color: bisque; */
 }
 
 .Desctiption{
-    margin-top: -12px;
+    margin: 0;
+    /* margin-top: -12px; */
     /* background-color: #2781B8; */
     font-family: Roboto;
     font-style: normal;
@@ -119,7 +141,9 @@ h1{
     /* background-color: gray; */
     margin-left: auto;
     margin-right: auto;
-    margin-top: -5px;
+    margin-top: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .Cliente{
     /* background-color: blueviolet; */
@@ -134,4 +158,55 @@ h1{
 .Horas{
     width: 51.86px;
     height: 34px; 
+ }
+
+ hr{
+     margin: 0;
+ }
+
+ .titulo_tabla{
+     height: 40px;
+     width: 542px;
+     background-color: #C7D1E2;
+ }
+
+ .inputTable{
+    min-width: 40%;
+    /* max-width: 70%; */
+     margin: 0;
+     padding: 0;
+    /* margin-top: 5px; */
+    /* padding: 5px; */
+    font-size: 14px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #CCCCCC;
+    color: #000000;
+    border-radius: 8px;
+    display: inline;
+
+ }
+ .inputTable:disabled{
+     
+    margin: 0;
+    padding: 0;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 7px;
+    font-size: 14px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #CCCCCC;
+    color: black;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-sizing: border-box;
+
+ }
+
+ .wrapper_table_row{
+     margin: 0;
+     padding-left: 35px;
+     padding-right: 35px;
  }
