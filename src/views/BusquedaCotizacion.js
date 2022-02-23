@@ -10,11 +10,11 @@ export const BusquedaCotizacion = ({ defaultCategories = '' }) => {
 
     const [number, setNumber] = useState('0');
     const [search, setSearch] = useState(false);
-    
+
 
     const navigate = useNavigate()
 
-    
+
     // if (setNumber != 0) {
     //     console.log('es mayor')
     //     // navigate('/cot/edit');
@@ -47,19 +47,25 @@ export const BusquedaCotizacion = ({ defaultCategories = '' }) => {
 
     return (
         <>
-            <div>
-                <h1>Cotizaciones</h1>
-                <div className='card-white'>
-                    <div style={{ height: '40px' }}></div>
-                    <FormBusqueda setNumber={setNumber} />
-                    <div style={{ height: '10px' }}></div>
-                    {/* {search ? (<p>Si</p>) : (<p>No</p>)} */}
-                    <Cotizacion setDatos={number}/>
+            <div className='card-container-parent'>
+                <div className='card-container'>
+                    <h1>Cotizaciones</h1>
+                    <div className='card-white'>
+                        <div style={{ height: '40px' }}>
+                        </div>
 
-                    <p>{number}</p>
+                        <FormBusqueda setNumber={setNumber} />
+
+                        <div style={{ height: '10px' }}>
+                        </div>
+                        
+                        {/* {search ? (<p>Si</p>) : (<p>No</p>)} */}
+                        <Cotizacion setDatos={number} />
+
+                        <p>{number}</p>
+                    </div>
                 </div>
             </div>
-
 
         </>
     )

@@ -1,12 +1,17 @@
+html, body{
+	height:100%;
+    margin: 0;
+}
 
 h1{
     font-family: 'Roboto';
     font-style: normal;
     font-weight: bold;
-    font-size: 34px;
+    font-size: 35px;
     line-height: 40px;
     color: #2781B8;
     text-align: center;
+    margin: 0;
 
 }
 
@@ -15,13 +20,23 @@ h1{
     margin-top: 60px;
 }
 
+.card-container-parent{
+    height: 100vh;
+    background-color: #EFF4F6;
+    display: flex;
+
+}
+.card-container{
+    margin: auto auto;
+}
+
 .card-white{
     /* width: 50%; */
     width: 542px;
     height: 450px;
     margin-left: auto;
     margin-right: auto;
-
+    
     background: #FFFFFF;
     border-radius: 26px;
 }
