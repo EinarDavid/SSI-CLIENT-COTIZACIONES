@@ -13,7 +13,7 @@ export const BusquedaCotizacion = ({ defaultCategories = '' }) => {
 
     const [number, setNumber] = useState('');
     const [search, setSearch] = useState(false);
-    const [cotizaciones, setCotizaciones] = useState([{ estado: '' }]);
+    const [cotizaciones, setCotizaciones] = useState([{ status: '' }]);
     const [detalle, setDetalle] = useState([]);
 
 
@@ -23,7 +23,7 @@ export const BusquedaCotizacion = ({ defaultCategories = '' }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(number)
+        // console.log(number)
 
         if (number.trim().length > 1) {
             const res = await fetch(`http://localhost:4000/ssiCotizacion/${number}`)
@@ -32,30 +32,25 @@ export const BusquedaCotizacion = ({ defaultCategories = '' }) => {
 
             // (data.estado === 'Null' ? (cotizaciones.estado = 'Null') : setCotizaciones(data))
 
-            (data[0].estado === 'Null' ? (cotizaciones[0].estado = 'Null') :
-                ((setCotizaciones(data))
-                )
-            )
+            // ((data[0].estado === 'Null') ? (cotizaciones[0].estado = 'Null') : ((setCotizaciones(data))))
+            // console.log('');
+            if ((data[0].status === 'null')) {
+                (cotizaciones[0].status = 'null')
+            } else {
+                (setCotizaciones(data))
+            }
 
-            console.log('datafeceeeee', data);
-            console.log(cotizaciones[0].estado);
-            console.log('data state', data[0].estado);
+            if (data[0].status === 'sent') {
+                const id_busqueda = data[0].id_quotation; 
+                getCotizacionDetalle(id_busqueda)
+            }
+            // (data[0].estado === 'true' ? (getCotizacionDetalle(number)) : console.log('data No tiene detalle'))
 
-            (data[0].estado === 'true' ? (getCotizacionDetalle(number)) : console.log('data No tiene detalle'))
 
-
-
-            // if (data[0].estado === 'true') {
-            //     const result = await fetch(`http://localhost:4000/ssiCotizacionDetalle/${number}`)
-            //     const resdetalle = await result.json();
-            //     console.log(resdetalle);
-            //     setDetalle(resdetalle)
-            // }
-
-            setNumber('');
         }
-
+        setNumber('');
     }
+    console.log(Date());
 
     const getCotizacionDetalle = async (id) => {
         const url = `http://localhost:4000/ssiCotizacionDetalle/${id}`
@@ -100,9 +95,9 @@ export const BusquedaCotizacion = ({ defaultCategories = '' }) => {
 
                     {
                         cotizaciones.map((cot, i) => {
-                            return (cot.estado === 'true') ? (<CotizacionView key={i} setDatos={cotizaciones} setDetalle={detalle} />) :
-                                (cot.estado === 'false') ? (<Cotizacion setDatos={cotizaciones} key={i} />) :
-                                    (cot.estado === 'Null') ? (<BusquedaNoExiste key={i} />) : (<Busqueda key={i} />)
+                            return (cot.status === 'sent') ? (<CotizacionView key={i} setDatos={cotizaciones} setDetalle={detalle} />) :
+                                (cot.status === 'sale') ? (<Cotizacion setDatos={cotizaciones} key={i} />) :
+                                    (cot.status === 'null') ? (<BusquedaNoExiste key={i} />) : (<Busqueda key={i} />)
                         })
                     }
 

@@ -167,7 +167,7 @@ export const Cotizacion = ({ setDatos }) => {
                                         rol.map((rol, index) => (
                                             <div key={index} style={{ display: 'flex' }}>
                                                 <input
-
+                                                    //Añadir CLase de CSS
                                                     type='text'
                                                     name='rol'
                                                     placeholder='Ingresa el rol'
@@ -176,14 +176,17 @@ export const Cotizacion = ({ setDatos }) => {
                                                     required
                                                 ></input>
                                                 <input
+                                                //Añadir CLase de CSS
                                                     type='text'
-                                                    name='hora'
+                                                    name='esfuerzo'
                                                     placeholder='Hora'
                                                     value={rol.horas}
                                                     onChange={(e) => handleChangeHora(e, index)}
+                                                    //Agregar un Value
                                                 ></input>
 
                                                 <button
+                                                //Añadir CLase de CSS
                                                     style={{ marginLeft: '5px' }}
                                                     onClick={() => { handleRemoveInputRol(index) }}
                                                 >-</button>
@@ -199,12 +202,12 @@ export const Cotizacion = ({ setDatos }) => {
                                     <hr />
                                     <div className='footerContainer'>
                                         <div>
-                                            {sum === total_horas ? <button onClick={() => setModalShow(true)}>Guardar</button> :
+                                            {sum === total_horas ? <button  onClick={() => setModalShow(true)}>Guardar</button> :
                                                 (<button
                                                     disabled
-                                                >Guardar</button>)}
+                                                >Guardar Añadir estilo</button>)}
                                         </div>
-                                        {sum === total_horas ? <p>Total hrs: {sum} (Añadir Icon)</p> : <p style={{ color: '#FF5574' }}>Total hrs: {sum} (Añadir Icon)</p>}
+                                        {sum === total_horas ? <p>Total hrs: {sum} (Añadir Icon)</p> : <p style={{ color: '#FF5574' }}>Total hrs: {sum}</p>}
 
                                     </div>
                                 </div>
@@ -217,6 +220,7 @@ export const Cotizacion = ({ setDatos }) => {
             </div>
 
             <Modal
+                bsPrefix='CotainerModal'
                 show={modalShow}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered>
