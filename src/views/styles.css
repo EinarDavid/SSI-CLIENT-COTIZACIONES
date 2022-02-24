@@ -7,6 +7,7 @@ h1{
     line-height: 40px;
     color: #2781B8;
     text-align: center;
+    margin-top: 20px;
 
 }
 
@@ -185,4 +186,32 @@ h1{
     align-items: center;
     justify-content: center;
  }
+
+ /* Tabla Editable */
+ .buttonAddContainer{
+    /* background-color: #20C197; */
+    text-align: center;
+ }
+ .buttonAdd{
+    width: 446px;
+    height: 30px;
+    background: #FFFFFF;
+    border: 1px solid #EAEAEA;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 18px;
+
+    text-align: center;
+
+    color: #9F9F9F;
+ }
  
+.containerTableEdit{
+    background-color: #20C197;
+    height: 200px;
+}

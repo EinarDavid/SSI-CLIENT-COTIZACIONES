@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 
+
 export const CotizacionView = ({ setDatos, setDetalle }) => {
 
     // console.log(setDetalle[0].rol)
     // const [dataDetalle, setDataDetalle] = useState([]);
-    const { numero_cotizacion, fecha, cliente, responsable } = setDatos[0];
+    const { numero_cotizacion, fecha, cliente, responsable, total_horas } = setDatos[0];
     // const numero_cotizacion = '21321';
     // const fecha = '12/02/2021';
     // const cliente = 'Ivar Carrasco';
@@ -14,7 +15,8 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
 
 
     return (
-        <div className='containerCotizacion'>
+        <div>
+            <div className='containerCotizacion'>
             <div className='DatosNumberFecha'>
                 <h2 className='NumberCotizacion'>Cotizacion: {numero_cotizacion} </h2>
                 <p className='FechaCreacion'>Creado: {fecha} </p>
@@ -31,7 +33,7 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
                 </div>
                 <div className='Horas'>
                     <p className='Title'>Horas</p>
-                    <p className='Desctiption'>Falta</p>
+                    <p className='Desctiption'>{total_horas}</p>
                 </div>
             </div>
             <div style={{ height: '20px' }}></div>
@@ -60,9 +62,11 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
                 <hr/>
                 <div className='footerContainer'>
                     <div><button>Icon</button></div>
-                    <p>Total hrs: Falta (Añadir Icon)</p>
+                    <p>Total hrs: {total_horas} (Añadir Icon)</p>
                 </div>
             </div>
+        </div>
+        
         </div>
     )
 }
