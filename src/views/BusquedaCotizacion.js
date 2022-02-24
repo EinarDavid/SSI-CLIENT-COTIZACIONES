@@ -34,16 +34,16 @@ export const BusquedaCotizacion = ({ defaultCategories = '' }) => {
 
             (data[0].estado === 'Null' ? (cotizaciones[0].estado = 'Null') :
                 ((setCotizaciones(data))
-                    )
+                )
             )
 
             console.log('datafeceeeee', data);
             console.log(cotizaciones[0].estado);
             console.log('data state', data[0].estado);
 
-            (data[0].estado === 'true' ? (getCotizacionDetalle(number)): console.log('data No tiene detalle'))
+            (data[0].estado === 'true' ? (getCotizacionDetalle(number)) : console.log('data No tiene detalle'))
 
-            
+
 
             // if (data[0].estado === 'true') {
             //     const result = await fetch(`http://localhost:4000/ssiCotizacionDetalle/${number}`)
@@ -102,13 +102,9 @@ export const BusquedaCotizacion = ({ defaultCategories = '' }) => {
                         cotizaciones.map((cot, i) => {
                             return (cot.estado === 'true') ? (<CotizacionView key={i} setDatos={cotizaciones} setDetalle={detalle} />) :
                                 (cot.estado === 'false') ? (<Cotizacion setDatos={cotizaciones} key={i} />) :
-                                    (cot.estado === 'Null') ? (<BusquedaNoExiste key={i}/>) : (<Busqueda key={i}/>)
+                                    (cot.estado === 'Null') ? (<BusquedaNoExiste key={i} />) : (<Busqueda key={i} />)
                         })
                     }
-
-
-
-
 
                     <p>{number}</p>
                 </div>

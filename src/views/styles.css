@@ -215,3 +215,18 @@ h1{
     background-color: #20C197;
     height: 200px;
 }
+
+/* Boton de DropDown */
+.dropdownOption{
+    background-color: transparent;
+    border: none;
+    
+}
+.dropdownOption:hover{
+    background-color: transparent;
+    border: none;
+}
+.dropdownOption:active{
+    background-color: transparent;
+    border: none;
+}

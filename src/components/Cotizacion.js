@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useFetchCotizacion } from '../hooks/useFetchCotizacion';
 
-import { Modal } from 'react-bootstrap';
+import { Dropdown, Modal } from 'react-bootstrap';
 
 // function ModalVerticar(props) {
 //     return (
@@ -22,15 +22,15 @@ import { Modal } from 'react-bootstrap';
 
 export const Cotizacion = ({ setDatos }) => {
 
-    const { numero_cotizacion, fecha, cliente, responsable, total_horas } = setDatos[0];
+    const { numero_cotizacion, fecha, cliente, responsable, total_horas, estado } = setDatos[0];
 
     const cotizacion = setDatos[0];
-    console.log('Coooot', cotizacion);
+    // console.log('Coooot', cotizacion);
 
     const [rol, setRol] = useState([]);
     const [modalShow, setModalShow] = useState(false)
 
-    console.log('MODALSHOW', modalShow);
+    // console.log('MODALSHOW', modalShow);
     // Suma de la Horas
     var sum = 0;
     rol.map(({ horas }) => {
@@ -72,16 +72,19 @@ export const Cotizacion = ({ setDatos }) => {
             method: 'POST',
             body: JSON.stringify(detalle),
             headers: { "Content-Type": "application/json" },
+
         }).then(async () => {
             cotizacion.estado = 'true';
-            console.log(cotizacion);
+            // console.log(cotizacion);
             const resp = await fetch(`http://localhost:4000/ssiCotizacion/${numero_cotizacion}`, {
                 method: 'PUT',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(cotizacion),
             });
+            setModalShow(false);
+            console.log('Ressss', resp);
         })
-            .catch( console.log('El Fetch fallo'))
+            .catch((e) => { console.error(e) })
 
         console.log('Boton Apretado-----')
     }
@@ -120,60 +123,99 @@ export const Cotizacion = ({ setDatos }) => {
                 <div style={{ height: '10px' }}></div>
                 {/* <form onSubmit={handleSubmit}> */}
                 {/* <form > */}
-                <div className='containerTableEdit'>
-                    {
-                        rol.map((rol, index) => (
-                            <div key={index} style={{ display: 'flex' }}>
-                                <input
-
-                                    type='text'
-                                    name='rol'
-                                    placeholder='Ingresa el rol'
-                                    value={rol.rol}
-                                    onChange={(e) => handleChangeRol(e, index)}
-                                    required
-                                ></input>
-                                <input
-                                    type='text'
-                                    name='hora'
-                                    placeholder='Hora'
-                                    value={rol.horas}
-                                    onChange={(e) => handleChangeHora(e, index)}
-                                ></input>
-
-                                <button
-                                    style={{ marginLeft: '5px' }}
-                                    onClick={() => { handleRemoveInputRol(index) }}
-                                >-</button>
-                            </div>
-                        ))
-                    }
-                    <div className='buttonAddContainer'>
-                        <button onClick={addInputs} className='buttonAdd'>Click aqui o presiona Shift + Enter para añadir un nuevo rol</button>
-                    </div>
-
-                </div>
-                <div>
-                    <hr />
-                    <div className='footerContainer'>
+                {
+                    (estado === 'true') ? (
                         <div>
-                            {sum === total_horas ? <button onClick={() => setModalShow(true)}>Guardar</button> :
-                                (<button
-                                    disabled
-                                >Guardar</button>)}
+                            <div className='containerTableEdit'>
+                                {
+                                    rol.map((det, i) => {
+                                        return (
+                                            <div key={i}>
+                                                <div className='containerTable' >
+                                                    <p>{det.rol}</p>
+                                                    <p>{det.horas}</p>
+                                                </div>
+                                                <hr />
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                            <div>
+                                <hr />
+                                <div className='footerContainer'>
+                                    <div>
+                                        <Dropdown>
+                                            <Dropdown.Toggle  bsPrefix='dropdownOption'>
+                                                <img src='./Images/busqueda.png' width={30}></img>
+                                            </Dropdown.Toggle>
+                                            <Dropdown.Menu >
+                                                <Dropdown.Item>Rehacer cotizacion (descartar actual)</Dropdown.Item>
+                                                <Dropdown.Item>Ver cotizaciones descartadas</Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                    </div>
+                                    <p>Total hrs: {total_horas} (Añadir Icon)</p>
+                                </div>
+                            </div>
                         </div>
-                        {sum === total_horas ? <p>Total hrs: {sum} (Añadir Icon)</p> : <p style={{ color: '#FF5574' }}>Total hrs: {sum} (Añadir Icon)</p>}
+                    ) :
+                        (
+                            <div>
+                                <div className='containerTableEdit'>
+                                    {
+                                        rol.map((rol, index) => (
+                                            <div key={index} style={{ display: 'flex' }}>
+                                                <input
 
-                    </div>
-                </div>
+                                                    type='text'
+                                                    name='rol'
+                                                    placeholder='Ingresa el rol'
+                                                    value={rol.rol}
+                                                    onChange={(e) => handleChangeRol(e, index)}
+                                                    required
+                                                ></input>
+                                                <input
+                                                    type='text'
+                                                    name='hora'
+                                                    placeholder='Hora'
+                                                    value={rol.horas}
+                                                    onChange={(e) => handleChangeHora(e, index)}
+                                                ></input>
+
+                                                <button
+                                                    style={{ marginLeft: '5px' }}
+                                                    onClick={() => { handleRemoveInputRol(index) }}
+                                                >-</button>
+                                            </div>
+                                        ))
+                                    }
+                                    <div className='buttonAddContainer'>
+                                        <button onClick={addInputs} className='buttonAdd'>Click aqui o presiona Shift + Enter para añadir un nuevo rol</button>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <hr />
+                                    <div className='footerContainer'>
+                                        <div>
+                                            {sum === total_horas ? <button onClick={() => setModalShow(true)}>Guardar</button> :
+                                                (<button
+                                                    disabled
+                                                >Guardar</button>)}
+                                        </div>
+                                        {sum === total_horas ? <p>Total hrs: {sum} (Añadir Icon)</p> : <p style={{ color: '#FF5574' }}>Total hrs: {sum} (Añadir Icon)</p>}
+
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                }
+
                 {/* </form> */}
                 {/* <button onClick={() => setModalShow(true)}>Guardar</button> */}
             </div>
-            {/* <ModalVerticar
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-               
-            /> */}
+
             <Modal
                 show={modalShow}
                 aria-labelledby="contained-modal-title-vcenter"
