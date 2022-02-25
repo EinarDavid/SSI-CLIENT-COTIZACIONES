@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useFetchCotizacion } from '../hooks/useFetchCotizacion';
 
 import { Dropdown, Modal } from 'react-bootstrap';
 
@@ -8,28 +7,31 @@ export const Cotizacion = ({ setDatos }) => {
 
     const { sale_order, effort, portafolio, state, login, project_code, partner_name } = setDatos[0];
 
-    
+
     const urlServer = 'http://localhost:4000';
     // console.log('effff', setDatos[0]);
     const [rol, setRol] = useState([]);
-    const [modalShow, setModalShow] = useState(false)
+    const [modalShow, setModalShow] = useState(false);
+    const [cotizacionDB, setCotizacionDB] = useState([{ status: '' }]);
 
     const fecha = new Date();
     const a = fecha.getFullYear();
-    const m = fecha.getMonth()+1;
+    const m = fecha.getMonth() + 1;
     const d = fecha.getDate();
     const fechaActual = `${a}/${m}/${d}`;
 
     const cotizacion = [{
-        id_order : sale_order,
-        client : partner_name,
+        id_order: sale_order,
+        client: partner_name,
         responsible: login,
         date: fechaActual,
         status: 'BLOCKET',
-        total_effort: effort,
+        total_effort: Number.parseFloat(effort),
         project_code: project_code
-        
+
     }];
+
+    // console.log('Cotizacioooon', cotizacion)
 
     // Suma de la Horas
     var sum = 0.00;
@@ -63,29 +65,44 @@ export const Cotizacion = ({ setDatos }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const detalle = {
-            id_quotation: sale_order, //corregir
-            valores: JSON.stringify(rol)
-        }
+
 
         const result = await fetch(`${urlServer}/ssiCotizacion`, {
             method: 'POST',
-            body: JSON.stringify(cotizacion),
+            body: JSON.stringify(cotizacion[0]),
             headers: { "Content-Type": "application/json" },
 
         });
         const datacotizacion = await result.json();
-        console.log('Resss', result);
-        console.log('DataCotizacion', datacotizacion);
-        if(datacotizacion.length()>0){
-            console.log('Entro-----')
+        setCotizacionDB(datacotizacion);
+        // console.log('Resss', result);
+        // console.log('DataCotizacion', datacotizacion);
+
+        if (result.ok) {
+            // console.log('ID-DETALLE', datacotizacion.id_quotation);
+
+            const detalle = {
+                id_quotation: datacotizacion.id_quotation, //corregir
+                valores: JSON.stringify(rol)
+            }
+
+            const result2 = await fetch(`${urlServer}/ssiCotizacionDetalle`, {
+                method: 'POST',
+                body: JSON.stringify(detalle),
+                headers: { "Content-Type": "application/json" },
+
+            })
+            const datacotizaciondetalle = await result2.json();
+
+            // console.log('Detalle Cotizacion', datacotizaciondetalle);
+
         }
 
-
+        setModalShow(false);
         console.log('Boton Apretado-----')
     }
 
-    console.log('roooool', rol)
+    // console.log('CotDB', cotizacionDB);
 
     return (
         <div>
@@ -102,7 +119,7 @@ export const Cotizacion = ({ setDatos }) => {
                     </div>
                     <div className='Responsable'>
                         <p className='Title'>Responsable</p>
-                        <p className='Desctiption'>{}</p>
+                        <p className='Desctiption'>{ }</p>
                     </div>
                     <div className='Horas'>
                         <p className='Title'>Horas</p>
@@ -121,61 +138,84 @@ export const Cotizacion = ({ setDatos }) => {
                 {/* <form onSubmit={handleSubmit}> */}
                 {/* <form > */}
                 {
-
-                    (
-                        <div>
-                            <div className='containerTableEdit'>
+                    (cotizacionDB.status === 'BLOCKET') ?
+                        (<div>
+                            <div className='containerTableEdit' >
                                 {
-                                    rol.map((rol, index) => (
-                                        <div key={index} style={{ display: 'flex' }}>
-                                            <input
-                                                //Añadir CLase de CSS
-                                                type='text'
-                                                name='rol'
-                                                placeholder='Ingresa el rol'
-                                                value={rol.rol}
-                                                onChange={(e) => handleChangeRol(e, index)}
-                                                required
-                                            ></input>
-                                            <input
-                                                //Añadir CLase de CSS
-                                                type='time'
-                                                step="3600"
-                                                name='esfuerzo'
-                                                placeholder='Hora'
-                                                value={rol.horas}
-                                                onChange={(e) => handleChangeHora(e, index)}
-                                            //Agregar un Value
-                                            ></input>
-
-                                            <button
-                                                //Añadir CLase de CSS
-                                                style={{ marginLeft: '5px' }}
-                                                onClick={() => { handleRemoveInputRol(index) }}
-                                            >-</button>
-                                        </div>
-                                    ))
+                                    rol.map((det, i) => {
+                                        return (
+                                            <div key={i}>
+                                                <div className='containerTable' >
+                                                    <p>{det.role}</p>
+                                                    <p>{det.effort}</p>
+                                                </div>
+                                                <hr />
+                                            </div>
+                                        )
+                                    })
                                 }
-                                <div className='buttonAddContainer'>
-                                    <button onClick={addInputs} className='buttonAdd'>Click aqui o presiona Shift + Enter para añadir un nuevo rol</button>
-                                </div>
-
                             </div>
                             <div>
                                 <hr />
                                 <div className='footerContainer'>
-                                    <div>
-                                        {sum === effort ? <button onClick={() => setModalShow(true)}>Guardar</button> :
-                                            (<button
-                                                disabled
-                                            >Guardar Añadir estilo</button>)}
-                                    </div>
-                                    {sum === effort ? <p>Total hrs: {sum} (Añadir Icon)</p> : <p style={{ color: '#FF5574' }}>Total hrs: {sum}</p>}
-
+                                    <div><button>Icon</button></div>
+                                    <p>Total hrs: {Number.parseFloat(effort)} (Añadir Icon)</p>
                                 </div>
                             </div>
-                        </div>
-                    )
+                        </div>)
+                        : (
+                            <div>
+                                <div className='containerTableEdit'>
+                                    {
+                                        rol.map((rol, index) => (
+                                            <div key={index} style={{ display: 'flex' }}>
+                                                <input
+                                                    //Añadir CLase de CSS
+                                                    type='text'
+                                                    name='rol'
+                                                    placeholder='Ingresa el rol'
+                                                    value={rol.rol}
+                                                    onChange={(e) => handleChangeRol(e, index)}
+                                                    required
+                                                ></input>
+                                                <input
+                                                    //Añadir CLase de CSS
+                                                    type='text'
+                                                    name='esfuerzo'
+                                                    placeholder='Hora'
+                                                    value={rol.horas}
+                                                    onChange={(e) => handleChangeHora(e, index)}
+                                                //Agregar un Value
+                                                ></input>
+
+                                                <button
+                                                    //Añadir CLase de CSS
+                                                    style={{ marginLeft: '5px' }}
+                                                    onClick={() => { handleRemoveInputRol(index) }}
+                                                >-</button>
+                                            </div>
+                                        ))
+                                    }
+                                    <div className='buttonAddContainer'>
+                                        <button onClick={addInputs} className='buttonAdd'>Click aqui o presiona Shift + Enter para añadir un nuevo rol</button>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <hr />
+                                    <div className='footerContainer'>
+                                        <div>
+                                            {sum === Number.parseFloat(effort) ? <button onClick={() => setModalShow(true)}>Guardar</button> :
+                                                (<button
+                                                    disabled
+                                                >Guardar Añadir estilo</button>)}
+                                        </div>
+                                        {sum === Number.parseFloat(effort) ? <p>Total hrs: {sum} (Añadir Icon)</p> : <p style={{ color: '#FF5574' }}>Total hrs: {sum}</p>}
+
+                                    </div>
+                                </div>
+                            </div>
+                        )
                 }
 
                 {/* </form> */}
@@ -183,7 +223,6 @@ export const Cotizacion = ({ setDatos }) => {
             </div>
 
             <Modal
-                bsPrefix='CotainerModal'
                 show={modalShow}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered>

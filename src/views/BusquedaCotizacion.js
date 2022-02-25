@@ -33,15 +33,15 @@ export const BusquedaCotizacion = ({ defaultCategories = '' }) => {
             // console.log('DataVistaaaa', dataVista)
             setCotizacionesVista(dataVista);
 
-            if (dataVista[0].state != 'null') {
+            if (dataVista[0].state !== 'null') {
                 // getCotizacion(dataVista[0].sale_order);
                 const url = `${urlServer}/ssiCotizacion/${dataVista[0].sale_order}`
                 const resp = await fetch(url);
                 const datacotizacion = await resp.json();
-                console.log('DataCooot', datacotizacion)
+                // console.log('DataCooot', datacotizacion)
                 setCotizaciones(datacotizacion);
 
-                if (datacotizacion[0].status != 'null') {
+                if (datacotizacion[0].status !== 'null') {
                     const url2 = `${urlServer}/ssiCotizacionDetalle/${datacotizacion[0].id_quotation}`
                     const resp2 = await fetch(url2);
                     const datadetalle = await resp2.json();
@@ -123,9 +123,9 @@ export const BusquedaCotizacion = ({ defaultCategories = '' }) => {
                     {
                         cotizacionesVista.map((cot, i) => {
                             // console.log('Estado Cot', cot.state);
-                            return (cot.state != 'null' && cotizaciones[0].status === 'null') ? (<Cotizacion setDatos={cotizacionesVista} key={i} />) :
-                                (cot.state != 'null' && cotizaciones[0].status === 'BLOCKET') ? (<CotizacionView key={i} setDatos={cotizaciones} setDetalle={detalle} />) :
-                                    (cot.state != 'null' && cotizaciones[0].status === 'EDIT') ? (<p>Añadir para editar</p>) :
+                            return (cot.state !== 'null' && cotizaciones[0].status === 'null') ? (<Cotizacion setDatos={cotizacionesVista} key={i} />) :
+                                (cot.state !== 'null' && cotizaciones[0].status === 'BLOCKET') ? (<CotizacionView key={i} setDatos={cotizaciones} setDetalle={detalle} />) :
+                                    (cot.state !== 'null' && cotizaciones[0].status === 'EDIT') ? (<p>Añadir para editar</p>) :
                                         (cot.state === 'null') ? (<BusquedaNoExiste key={i} />) : (<Busqueda key={i} />)
                         })
                     }
