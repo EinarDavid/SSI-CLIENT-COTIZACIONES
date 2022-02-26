@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
-import { Dropdown, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 
-export const Cotizacion = ({ setDatos }) => {
+export const Cotizacion = ({ setDatos, rolData }) => {
 
     const { sale_order, effort, portafolio, state, login, project_code, partner_name } = setDatos[0];
 
@@ -25,13 +25,15 @@ export const Cotizacion = ({ setDatos }) => {
         client: partner_name,
         responsible: login,
         date: fechaActual,
-        status: 'BLOCKET',
+        status: 'BLOCKED',
         total_effort: Number.parseFloat(effort),
         project_code: project_code
 
     }];
 
-    // console.log('Cotizacioooon', cotizacion)
+    const rolDropdown = rolData;
+
+    // console.log('Rooool', rol)
 
     // Suma de la Horas
     var sum = 0.00;
@@ -58,14 +60,18 @@ export const Cotizacion = ({ setDatos }) => {
         setRol([...rol]);
     }
     const handleRemoveInputRol = (position) => {
-        setRol([...rol.filter((_, index) => index != position)]);
+        setRol([...rol.filter((_, index) => index !== position)]);
         // setRol([...rol.horas.filter((_, inde) => inde != position)]);
+    }
+    const valideKey = (e) => {
+        var key = window.Event ? e.which : e.keyCode;
+
+        if ((key < 48 || key > 57) && (key !== 8))
+            e.preventDefault();
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-
 
         const result = await fetch(`${urlServer}/ssiCotizacion`, {
             method: 'POST',
@@ -86,21 +92,23 @@ export const Cotizacion = ({ setDatos }) => {
                 valores: JSON.stringify(rol)
             }
 
-            const result2 = await fetch(`${urlServer}/ssiCotizacionDetalle`, {
+            await fetch(`${urlServer}/ssiCotizacionDetalle`, {
                 method: 'POST',
                 body: JSON.stringify(detalle),
                 headers: { "Content-Type": "application/json" },
 
             })
-            const datacotizaciondetalle = await result2.json();
+            // const datacotizaciondetalle = await result2.json();
 
             // console.log('Detalle Cotizacion', datacotizaciondetalle);
-
+            // (result2.ok)
         }
 
         setModalShow(false);
         console.log('Boton Apretado-----')
     }
+
+
 
     // console.log('CotDB', cotizacionDB);
 
@@ -119,7 +127,7 @@ export const Cotizacion = ({ setDatos }) => {
                     </div>
                     <div className='Responsable'>
                         <p className='Title'>Responsable</p>
-                        <p className='Desctiption'>{ }</p>
+                        <p className='Desctiption'>{login}</p>
                     </div>
                     <div className='Horas'>
                         <p className='Title'>Horas</p>
@@ -138,7 +146,7 @@ export const Cotizacion = ({ setDatos }) => {
                 {/* <form onSubmit={handleSubmit}> */}
                 {/* <form > */}
                 {
-                    (cotizacionDB.status === 'BLOCKET') ?
+                    (cotizacionDB.status === 'BLOCKED') ?
                         (<div>
                             <div className='containerTableEdit' >
                                 {
@@ -146,17 +154,17 @@ export const Cotizacion = ({ setDatos }) => {
                                         return (
                                             <div key={i}>
                                                 <div className='containerTable' >
-                                                    <p>{det.role}</p>
-                                                    <p>{det.effort}</p>
+                                                    <p className='tableRol'>{det.role}</p>
+                                                    <p className='tableHora'>{det.effort}</p>
                                                 </div>
-                                                <hr />
+                                                <div className='lineaTable' />
                                             </div>
                                         )
                                     })
                                 }
                             </div>
                             <div>
-                                <hr />
+                                <div className='lineaTable' />
                                 <div className='footerContainer'>
                                     <div><button>Icon</button></div>
                                     <p>Total hrs: {Number.parseFloat(effort)} (Añadir Icon)</p>
@@ -169,15 +177,22 @@ export const Cotizacion = ({ setDatos }) => {
                                     {
                                         rol.map((rol, index) => (
                                             <div key={index} style={{ display: 'flex' }}>
-                                                <input
-                                                    //Añadir CLase de CSS
-                                                    type='text'
-                                                    name='rol'
-                                                    placeholder='Ingresa el rol'
+
+                                                <select
                                                     value={rol.rol}
                                                     onChange={(e) => handleChangeRol(e, index)}
                                                     required
-                                                ></input>
+                                                    defaultValue={'Default'}
+                                                >
+                                                    <option value='Default' disabled >Selecciona el Rol</option>
+                                                    {
+                                                        rolDropdown.map(({ role, id_role }) => (
+                                                            <option key={id_role}
+                                                                value={role}
+                                                            >{role}</option>
+                                                        ))
+                                                    }
+                                                </select>
                                                 <input
                                                     //Añadir CLase de CSS
                                                     type='text'
@@ -185,6 +200,8 @@ export const Cotizacion = ({ setDatos }) => {
                                                     placeholder='Hora'
                                                     value={rol.horas}
                                                     onChange={(e) => handleChangeHora(e, index)}
+                                                    onKeyPress={(e) => valideKey(e)}
+                                                    defaultValue={0}
                                                 //Agregar un Value
                                                 ></input>
 
@@ -202,13 +219,14 @@ export const Cotizacion = ({ setDatos }) => {
 
                                 </div>
                                 <div>
-                                    <hr />
-                                    <div className='footerContainer'>
+                                    <div className='lineaTable' />
+                                    <div className='footerContainerEdit'>
                                         <div>
-                                            {sum === Number.parseFloat(effort) ? <button onClick={() => setModalShow(true)}>Guardar</button> :
+                                            {sum === Number.parseFloat(effort) ? <button className='buttonSave' onClick={() => setModalShow(true)}>Guardar</button> :
                                                 (<button
+                                                    className='buttonSave'
                                                     disabled
-                                                >Guardar Añadir estilo</button>)}
+                                                >Guardar</button>)}
                                         </div>
                                         {sum === Number.parseFloat(effort) ? <p>Total hrs: {sum} (Añadir Icon)</p> : <p style={{ color: '#FF5574' }}>Total hrs: {sum}</p>}
 
@@ -239,60 +257,3 @@ export const Cotizacion = ({ setDatos }) => {
         </div>
     )
 }
-
-// (estado === 'true') ? (
-//     <div>
-//         <div className='containerTableEdit'>
-//             {
-//                 rol.map((det, i) => {
-//                     return (
-//                         <div key={i}>
-//                             <div className='containerTable' >
-//                                 <p>{det.rol}</p>
-//                                 <p>{det.horas}</p>
-//                             </div>
-//                             <hr />
-//                         </div>
-//                     )
-//                 })
-//             }
-//         </div>
-//         <div>
-//             <hr />
-//             <div className='footerContainer'>
-//                 <div>
-//                     <Dropdown>
-//                         <Dropdown.Toggle  bsPrefix='dropdownOption'>
-//                             <img src='./Images/busqueda.png' width={30}></img>
-//                         </Dropdown.Toggle>
-//                         <Dropdown.Menu >
-//                             <Dropdown.Item>Rehacer cotizacion (descartar actual)</Dropdown.Item>
-//                             <Dropdown.Item>Ver cotizaciones descartadas</Dropdown.Item>
-//                         </Dropdown.Menu>
-//                     </Dropdown>
-//                 </div>
-//                 <p>Total hrs: {effort} (Añadir Icon)</p>
-//             </div>
-//         </div>
-//     </div>
-// ) :
-
-
-// ----------------------------------
-// const result = await fetch(`${urlServer}/ssiCotizacionDetalle`, {
-//     method: 'POST',
-//     body: JSON.stringify(detalle),
-//     headers: { "Content-Type": "application/json" },
-
-// }).then(async () => {
-//     // cotizacion.estado = 'true';
-
-//     const resp = await fetch(`${urlServer}/ssiCotizacion/${sale_order}`, {
-//         method: 'PUT',
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify(cotizacion),
-//     });
-//     setModalShow(false);
-//     console.log('Ressss', resp);
-// })
-//     .catch((e) => { console.error(e) })

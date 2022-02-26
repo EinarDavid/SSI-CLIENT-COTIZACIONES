@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 
 export const CotizacionView = ({ setDatos, setDetalle }) => {
@@ -16,6 +16,7 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
 
     return (
         <div>
+            <div style={{ height:'10px' }}></div>
             <div className='containerCotizacion'>
             <div className='DatosNumberFecha'>
                 <h2 className='NumberCotizacion'>Cotizacion: {id_order} </h2>
@@ -36,11 +37,11 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
                     <p className='Desctiption'>{total_effort}</p>
                 </div>
             </div>
-            <div style={{ height: '20px' }}></div>
+            <div style={{ height: '15px' }}></div>
             <div className='titleTable'>
                 <section className='titleContainer'>
-                    <p>Rol</p>
-                    <p>Esfuerzo (horas)</p>
+                    <p className='titleRol'>Rol</p>
+                    <p className='titleHora'>Esfuerzo (horas)</p>
                 </section>
             </div>
             <div className='containerTableEdit' >
@@ -49,20 +50,21 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
                         return(
                             <div key={i}>
                                 <div className='containerTable' >
-                                    <p>{det.role}</p>
-                                    <p>{det.effort}</p>
+                                    <p className='tableRol'>{det.role}</p>
+                                    <p className='tableHora'>{det.effort}</p>
                                 </div>
-                                <hr/>
+                                <div className='lineaTable'/>
+                                
                             </div>
                         )
                     })
                 }
             </div>
             <div>
-                <hr/>
+            <div className='lineaTable'/>
                 <div className='footerContainer'>
-                    <div><button>Icon</button></div>
-                    <p>Total hrs: {total_effort} (Añadir Icon)</p>
+                    {/* <div><button>Icon</button></div> */}
+                    <p className='footerHoras'>Total hrs: {total_effort} (Añadir Icon)</p>
                 </div>
             </div>
         </div>
