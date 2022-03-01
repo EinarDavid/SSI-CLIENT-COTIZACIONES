@@ -113,12 +113,12 @@ export const Cotizacion = ({ setDatos, rolData }) => {
         }
 
         setModalShow(false);
-        console.log('Boton Apretado-----')
+        // console.log('Boton Apretado-----')
     }
 
 
 
-    console.log('Rol', rol);
+    // console.log('Rol', rol);
 
     return (
         <div>
