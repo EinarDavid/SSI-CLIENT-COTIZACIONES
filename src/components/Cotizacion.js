@@ -56,8 +56,16 @@ export const Cotizacion = ({ setDatos, rolData }) => {
         setRol([...rol]);
     }
     const handleChangeHora = (e, index) => {
-        rol[index].effort = Number.parseFloat(e.target.value);
-        setRol([...rol]);
+        console.log('Horaaa', Number.parseFloat(e.target.value));
+
+        if (isNaN(Number.parseFloat(e.target.value))) {
+            rol[index].effort = 0;
+            setRol([...rol]);
+            // console.log('Entro Aqui')
+        } else {
+            rol[index].effort = Number.parseFloat(e.target.value);
+            setRol([...rol]);
+        }
     }
     const handleRemoveInputRol = (position) => {
         setRol([...rol.filter((_, index) => index !== position)]);
@@ -110,7 +118,7 @@ export const Cotizacion = ({ setDatos, rolData }) => {
 
 
 
-    // console.log('CotDB', cotizacionDB);
+    console.log('Rol', rol);
 
     return (
         <div>
