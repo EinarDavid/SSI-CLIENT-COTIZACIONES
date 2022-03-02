@@ -124,18 +124,23 @@ export const Cotizacion = ({ setDatos, rolData }) => {
         <div>
             <div className='containerCotizacion'>
                 <div className='DatosNumberFecha'>
+                    <div className='mitad'>
                     <h2 className='NumberCotizacion'>Cotizacion: {sale_order} </h2>
+                    </div>
+                    <div className='mitad'>
                     <p className='FechaCreacion'>Creado: {fechaActual} </p>
+                    </div>
                 </div>
                 <hr></hr>
                 <div className='containerDatos'>
+                   <div className='Responsable'>
+                        <p className='Title'>Responsable</p>
+                        <p className='Desctiption'>{login}</p>
+                    </div>
+
                     <div className='Cliente'>
                         <p className='Title'>Cliente</p>
                         <p className='Desctiption'>{partner_name}</p>
-                    </div>
-                    <div className='Responsable'>
-                        <p className='Title'>Responsable</p>
-                        <p className='Desctiption'>{login}</p>
                     </div>
                     <div className='Horas'>
                         <p className='Title'>Horas</p>
@@ -143,14 +148,14 @@ export const Cotizacion = ({ setDatos, rolData }) => {
                     </div>
                 </div>
 
-                <div style={{ height: '20px' }}></div>
+                {/* <div style={{ height: '20px' }}></div> */}
                 <div className='titleTable'>
                     <section className='titleContainer'>
                         <p>Rol</p>
                         <p>Esfuerzo (horas)</p>
                     </section>
                 </div>
-                <div style={{ height: '10px' }}></div>
+                {/* <div style={{ height: '10px' }}></div> */}
                 {/* <form onSubmit={handleSubmit}> */}
                 {/* <form > */}
                 {
@@ -171,11 +176,13 @@ export const Cotizacion = ({ setDatos, rolData }) => {
                                     })
                                 }
                             </div>
+                            <hr />
                             <div>
-                                <div className='lineaTable' />
+                                
+                                {/* <div className='lineaTable' /> */}
                                 <div className='footerContainer'>
-                                    <div><button>Icon</button></div>
-                                    <p>Total hrs: {Number.parseFloat(effort)} (Añadir Icon)</p>
+                                    {/* <div><button>Icon</button></div> */}
+                                    <p>Total hrs: {Number.parseFloat(effort)} <img src='./images/icons/check.svg' width={16} alt='Total correcto'/></p>
                                 </div>
                             </div>
                         </div>)
@@ -184,9 +191,14 @@ export const Cotizacion = ({ setDatos, rolData }) => {
                                 <div className='containerTableEdit'>
                                     {
                                         rol.map((rol, index) => (
-                                            <div key={index} style={{ display: 'flex' }}>
+                                            <div 
+                                            className='inputTableContainer'
+                                            key={index} 
+                                            // style={{ display: 'flex' }}
+                                            >
 
                                                 <select
+                                                    className='inputCell nombreInput'
                                                     value={rol.rol}
                                                     onChange={(e) => handleChangeRol(e, index)}
                                                     required
@@ -203,6 +215,7 @@ export const Cotizacion = ({ setDatos, rolData }) => {
                                                 </select>
                                                 <input
                                                     //Añadir CLase de CSS
+                                                    className='inputCell horaInput'
                                                     type='text'
                                                     name='esfuerzo'
                                                     placeholder='Hora'
@@ -215,7 +228,8 @@ export const Cotizacion = ({ setDatos, rolData }) => {
 
                                                 <button
                                                     //Añadir CLase de CSS
-                                                    style={{ marginLeft: '5px' }}
+                                                    className='boton_quitar'
+                                                    // style={{ marginLeft: '5px' }}
                                                     onClick={() => { handleRemoveInputRol(index) }}
                                                 >-</button>
                                             </div>
@@ -227,16 +241,17 @@ export const Cotizacion = ({ setDatos, rolData }) => {
 
                                 </div>
                                 <div>
-                                    <div className='lineaTable' />
+                                    <hr />
+                                    {/* <div className='lineaTable' /> */}
                                     <div className='footerContainerEdit'>
                                         <div>
-                                            {sum === Number.parseFloat(effort) ? <button className='buttonSave' onClick={() => setModalShow(true)}>Guardar</button> :
+                                            {sum === Number.parseFloat(effort) ? <button className='boton_primario boton_guardar' onClick={() => setModalShow(true)}>Guardar</button> :
                                                 (<button
-                                                    className='buttonSave'
+                                                    className='boton_primario boton_guardar'
                                                     disabled
                                                 >Guardar</button>)}
                                         </div>
-                                        {sum === Number.parseFloat(effort) ? <p>Total hrs: {sum} (Añadir Icon)</p> : <p style={{ color: '#FF5574' }}>Total hrs: {sum}</p>}
+                                        {sum === Number.parseFloat(effort) ? <p className='footerHoras'>Total hrs: {sum} <img src='./images/icons/check.svg' width={16} alt='Total correcto'></img></p> : <p className='total_incorrecto'>Total hrs: {sum}</p>}
 
                                     </div>
                                 </div>
@@ -253,12 +268,13 @@ export const Cotizacion = ({ setDatos, rolData }) => {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered>
                 <Modal.Body>
-                    <p>Confirma que quieres guardar los cambios</p>
-                    <div>
-                        <button onClick={() => setModalShow(false)}>Cancelar</button>
-                        <form onSubmit={handleSubmit}>
-                            <button>Guardar</button>
+                    <p className='texto_popup'>Confirma que quieres guardar los cambios. Revisa bien antes de guardar ya que <strong>no podrás editar esta cotización después.</strong></p>
+                    <div className='popup_button_container'>
+                    <form className='boton_salir_container' onSubmit={handleSubmit}>
+                            <button className='boton_primario boton_guardar_2'>Guardar</button>
                         </form>
+
+                        <button className='boton_secundario' onClick={() => setModalShow(false)}>Cancelar</button>
                     </div>
                 </Modal.Body>
             </Modal>

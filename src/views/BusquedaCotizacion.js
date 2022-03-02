@@ -66,10 +66,12 @@ export const BusquedaCotizacion = () => {
                 <div >
                     <h1>Cotizaciones</h1>
                     <div className='card-white'>
-                        <div style={{ height: '40px' }}></div>
+                        <div style={{ height: '32px' }}></div>
 
                         <div >
                             {
+                                
+                                
                                 (cotizaciones[0].status !== 'null') ?
                                     (<form className='formInputSearch' onSubmit={handleSubmit}>
                                         <input
@@ -83,15 +85,17 @@ export const BusquedaCotizacion = () => {
                                         >
                                         </input>
                                         <button
-                                            className='buttonEnviar'
+                                            className='boton_primario espacio_izquierda'
                                             type='submit'
                                         ><img src='./images/icons/Enviar.svg' width={30} alt='Enviar'></img>
                                         </button>
                                     </form>) :
+                                    
+                                    
                                     (
                                         <div className='formInputSearch'>
                                             <input
-                                                className='textInputDisabled'
+                                                className='textInput'
                                                 name='buscar'
                                                 type='text'
                                                 placeholder='Para volver a la búsqueda pulsa la X de la derecha'
@@ -102,7 +106,7 @@ export const BusquedaCotizacion = () => {
                                             >
                                             </input>
                                             <button
-                                            className='buttonX'
+                                            className='boton_primario espacio_izquierda'
                                                 onClick={() => setModalShow(true)}
                                                 type='submit'
                                             ><img src='./images/icons/Cancelar.svg' width={30} alt='Enviar'></img>
@@ -112,7 +116,7 @@ export const BusquedaCotizacion = () => {
                             }
                         </div>
 
-                        <div style={{ height: '10px' }}></div>
+                        {/* <div style={{ height: '10px' }}></div> */}
 
                         {
                             cotizacionesVista.map((cot, i) => {
@@ -132,12 +136,12 @@ export const BusquedaCotizacion = () => {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered>
                 <Modal.Body>
-                    <p>Confirma que quieres guardar los cambios</p>
-                    <div>
-                        <form>
-                            <button >No guardar y salir</button>
+                    <p className='texto_popup'>Parece que no has guardado esta cotización, si sales se perderan los datos llenados hasta ahora, pero podrás volver a llenar la cotización después. ¿Seguro que quieres salir?</p>
+                    <div className='popup_button_container'>
+                        <form className='boton_salir_container'>
+                            <button className='boton_salir' >Salir sin guardar</button>
                         </form>
-                        <button onClick={() => setModalShow(false)}>Cancelar</button>
+                        <button className='boton_secundario' onClick={() => setModalShow(false)}>Cancelar</button>
 
                     </div>
                 </Modal.Body>
