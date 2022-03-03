@@ -22,6 +22,7 @@ export const BusquedaCotizacion = () => {
 
 
     const urlServer = 'http://localhost:4000';
+    console.log(number.toUpperCase());
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,7 +33,9 @@ export const BusquedaCotizacion = () => {
             const dataRol = await resRol.json();
             setRolData(dataRol);
 
-            const res = await fetch(`${urlServer}/ssiCotizacionVista/${number}`);
+            
+
+            const res = await fetch(`${urlServer}/ssiCotizacionVista/${number.toUpperCase()}`);
             const dataVista = await res.json();
             // console.log('DataVistaaaa', dataVista)
             setCotizacionesVista(dataVista);

@@ -186,7 +186,7 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
                                             required
                                         // defaultValue={'Default'}
                                         >
-                                            <option value='Default' hidden >Selecciona el Rol</option>
+                                            <option value='Default' hidden >--Rol no definido--</option>
                                             {
                                                 rolDropdown.map(({ role, id_role }) => (
                                                     <option key={id_role}
