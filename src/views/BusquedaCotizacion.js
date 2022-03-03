@@ -22,7 +22,7 @@ export const BusquedaCotizacion = () => {
 
 
     const urlServer = 'http://localhost:4000';
-    console.log(number.toUpperCase());
+    // console.log(number.toUpperCase());
 
     const handleSubmit = async (e) => {
         e.preventDefault();
