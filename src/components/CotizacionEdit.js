@@ -175,7 +175,6 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
                 </div>
                 <div className='containerTableEdit' >
                     {
-                        (cotizaciones[0].status === 'EDIT') ? (
                             detalle.map((det, i) => {
                                 return (
                                     <div key={i} style={{ display: 'flex' }}>
@@ -216,21 +215,7 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
 
                                     </div>
                                 )
-                            })
-                        )
-                            :
-                            (detalle.map((det, i) => {
-                                return (
-                                    <div key={i}>
-                                        <div className='containerTable' >
-                                            <p className='tableRol'>{det.role}</p>
-                                            <p className='tableHora'>{Number(det.effort)}</p>
-                                        </div>
-                                        <div className='lineaTable' />
-
-                                    </div>
-                                )
-                            }))
+                            }) 
                     }
                     <div className='buttonAddContainer'>
                         <button onClick={addInputs} className='buttonAdd'>Click aqui o presiona Shift + Enter para añadir un nuevo rol</button>

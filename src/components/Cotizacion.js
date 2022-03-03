@@ -82,7 +82,7 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
 
     const validInput = () => {
         var valid = true;
-        if(rol.length === 0){
+        if (rol.length === 0) {
             valid = false;
         }
         rol.forEach(det => {
@@ -105,7 +105,7 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
         const datacotizacion = await result.json();
 
         // console.log('DataCotizacion', datacotizacion);
-        
+
         // setCotizacionDB(datacotizacion);
         // console.log('Resss', result);
 
@@ -170,102 +170,69 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
                     </section>
                 </div>
                 <div style={{ height: '10px' }}></div>
-                {/* <form onSubmit={handleSubmit}> */}
-                {/* <form > */}
-                {
-                    (cotizaciones[0].status === 'BLOCKED') ?
-                        (<div>
-                            <p>Entro aqui BLOCKED</p>
-                            <div className='containerTableEdit' >
-                                {
-                                    detalle.map((det, i) => {
-                                        return (
-                                            <div key={i}>
-                                                <div className='containerTable' >
-                                                    <p className='tableRol'>{det.role}</p>
-                                                    <p className='tableHora'>{Number(det.effort)}</p>
-                                                </div>
-                                                <div className='lineaTable' />
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </div>
+
+                <div>
+                    <div className='containerTableEdit'>
+                        {
+                            rol.map((rol, index) => (
+                                <div key={index} style={{ display: 'flex' }}>
+
+                                    <select
+                                        value={rol.rol}
+                                        onChange={(e) => handleChangeRol(e, index)}
+                                        required
+                                    // defaultValue={'Default'}
+                                    >
+                                        <option value='Default' hidden >--Rol no definido--</option>
+                                        {
+                                            rolDropdown.map(({ role, id_role }) => (
+                                                <option key={id_role}
+                                                    value={role}
+                                                >{role}</option>
+                                            ))
+                                        }
+                                    </select>
+                                    <input
+                                        //Añadir CLase de CSS
+                                        type='text'
+                                        name='esfuerzo'
+                                        placeholder='Hora'
+                                        value={rol.horas}
+                                        onChange={(e) => handleChangeHora(e, index)}
+                                        onKeyPress={(e) => valideKey(e)}
+                                        defaultValue={0}
+                                    //Agregar un Value
+                                    ></input>
+
+                                    <button
+                                        //Añadir CLase de CSS
+                                        style={{ marginLeft: '5px' }}
+                                        onClick={() => { handleRemoveInputRol(index) }}
+                                    >-</button>
+                                </div>
+                            ))
+                        }
+                        <div className='buttonAddContainer'>
+                            <button onClick={addInputs} className='buttonAdd'>Click aqui o presiona Shift + Enter para añadir un nuevo rol</button>
+                        </div>
+
+                    </div>
+                    <div>
+                        <div className='lineaTable' />
+                        <div className='footerContainerEdit'>
                             <div>
-                                <div className='lineaTable' />
-                                <div className='footerContainer'>
-                                    <div><button>Icon</button></div>
-                                    <p>Total hrs: {Number.parseFloat(effort)} (Añadir Icon)</p>
-                                </div>
+                                {(validar) ? <button className='buttonSave' onClick={() => setModalShow(true)}>Guardar</button> :
+                                    (<button
+                                        className='buttonSaveDisable'
+                                        disabled
+                                    >Guardar</button>)}
                             </div>
-                        </div>)
-                        : (
-                            <div>
-                                <div className='containerTableEdit'>
-                                    {
-                                        rol.map((rol, index) => (
-                                            <div key={index} style={{ display: 'flex' }}>
+                            {sum === Number.parseFloat(effort) ? <p>Total hrs: {sum} (Añadir Icon)</p> : <p style={{ color: '#FF5574' }}>Total hrs: {sum}</p>}
 
-                                                <select
-                                                    value={rol.rol}
-                                                    onChange={(e) => handleChangeRol(e, index)}
-                                                    required
-                                                    // defaultValue={'Default'}
-                                                >
-                                                    <option value='Default' hidden >--Rol no definido--</option>
-                                                    {
-                                                        rolDropdown.map(({ role, id_role }) => (
-                                                            <option key={id_role}
-                                                                value={role}
-                                                            >{role}</option>
-                                                        ))
-                                                    }
-                                                </select>
-                                                <input
-                                                    //Añadir CLase de CSS
-                                                    type='text'
-                                                    name='esfuerzo'
-                                                    placeholder='Hora'
-                                                    value={rol.horas}
-                                                    onChange={(e) => handleChangeHora(e, index)}
-                                                    onKeyPress={(e) => valideKey(e)}
-                                                    defaultValue={0}
-                                                //Agregar un Value
-                                                ></input>
+                        </div>
+                    </div>
+                </div>
 
-                                                <button
-                                                    //Añadir CLase de CSS
-                                                    style={{ marginLeft: '5px' }}
-                                                    onClick={() => { handleRemoveInputRol(index) }}
-                                                >-</button>
-                                            </div>
-                                        ))
-                                    }
-                                    <div className='buttonAddContainer'>
-                                        <button onClick={addInputs} className='buttonAdd'>Click aqui o presiona Shift + Enter para añadir un nuevo rol</button>
-                                    </div>
-
-                                </div>
-                                <div>
-                                    <div className='lineaTable' />
-                                    <div className='footerContainerEdit'>
-                                        <div>
-                                            {(validar) ? <button className='buttonSave' onClick={() => setModalShow(true)}>Guardar</button> :
-                                                (<button
-                                                    className='buttonSaveDisable'
-                                                    disabled
-                                                >Guardar</button>)}
-                                        </div>
-                                        {sum === Number.parseFloat(effort) ? <p>Total hrs: {sum} (Añadir Icon)</p> : <p style={{ color: '#FF5574' }}>Total hrs: {sum}</p>}
-
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                }
-
-                {/* </form> */}
-                {/* <button onClick={() => setModalShow(true)}>Guardar</button> */}
             </div>
 
             <Modal
