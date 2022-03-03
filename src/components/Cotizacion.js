@@ -1,24 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Modal } from 'react-bootstrap';
 
 
-export const Cotizacion = ({ setDatos, rolData }) => {
+export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, detalle }) => {
 
-    const { sale_order, effort, portafolio, state, login, project_code, partner_name } = setDatos[0];
+    const { sale_order, effort, login, project_code, partner_name } = setDatos[0];
+    // const { sale_order, effort, portafolio, state, login, project_code, partner_name } = setDatos[0];
 
 
     const urlServer = 'http://localhost:4000';
     // console.log('effff', setDatos[0]);
     const [rol, setRol] = useState([]);
     const [modalShow, setModalShow] = useState(false);
-    const [cotizacionDB, setCotizacionDB] = useState([{ status: '' }]);
+    const [validar, setValidar] = useState(false);
+    // const [cotizacionDB, setCotizacionDB] = useState([{ status: '' }]);
 
     const fecha = new Date();
     const a = fecha.getFullYear();
     const m = fecha.getMonth() + 1;
     const d = fecha.getDate();
-    const fechaActual = `${a}/${m}/${d}`;
+    const fechaActual = `${a}-${m}-${d}`;
 
     const cotizacion = [{
         id_order: sale_order,
@@ -56,7 +58,7 @@ export const Cotizacion = ({ setDatos, rolData }) => {
         setRol([...rol]);
     }
     const handleChangeHora = (e, index) => {
-        console.log('Horaaa', Number.parseFloat(e.target.value));
+        // console.log('Horaaa', Number.parseFloat(e.target.value));
 
         if (isNaN(Number.parseFloat(e.target.value))) {
             rol[index].effort = 0;
@@ -78,6 +80,19 @@ export const Cotizacion = ({ setDatos, rolData }) => {
             e.preventDefault();
     }
 
+    const validInput = () => {
+        var valid = true;
+        if(rol.length === 0){
+            valid = false;
+        }
+        rol.forEach(det => {
+            if (det.effort === 0 || det.role === '' || sum !== Number(effort)) {
+                valid = false;
+            }
+        });
+        return valid;
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -88,9 +103,12 @@ export const Cotizacion = ({ setDatos, rolData }) => {
 
         });
         const datacotizacion = await result.json();
-        setCotizacionDB(datacotizacion);
-        // console.log('Resss', result);
+
         // console.log('DataCotizacion', datacotizacion);
+        
+        // setCotizacionDB(datacotizacion);
+        // console.log('Resss', result);
+
 
         if (result.ok) {
             // console.log('ID-DETALLE', datacotizacion.id_quotation);
@@ -106,19 +124,20 @@ export const Cotizacion = ({ setDatos, rolData }) => {
                 headers: { "Content-Type": "application/json" },
 
             })
-            // const datacotizaciondetalle = await result2.json();
 
-            // console.log('Detalle Cotizacion', datacotizaciondetalle);
-            // (result2.ok)
         }
-
         setModalShow(false);
+        setCotizaciones([datacotizacion]);
         // console.log('Boton Apretado-----')
     }
 
+    useEffect(() => {
+        setValidar(validInput());
+    }, [rol])
 
 
-    // console.log('Rol', rol);
+    // console.log('Stado', cotizaciones[0].status);
+    // console.log('Roll', rol );
 
     return (
         <div>
@@ -154,16 +173,17 @@ export const Cotizacion = ({ setDatos, rolData }) => {
                 {/* <form onSubmit={handleSubmit}> */}
                 {/* <form > */}
                 {
-                    (cotizacionDB.status === 'BLOCKED') ?
+                    (cotizaciones[0].status === 'BLOCKED') ?
                         (<div>
+                            <p>Entro aqui BLOCKED</p>
                             <div className='containerTableEdit' >
                                 {
-                                    rol.map((det, i) => {
+                                    detalle.map((det, i) => {
                                         return (
                                             <div key={i}>
                                                 <div className='containerTable' >
                                                     <p className='tableRol'>{det.role}</p>
-                                                    <p className='tableHora'>{det.effort}</p>
+                                                    <p className='tableHora'>{Number(det.effort)}</p>
                                                 </div>
                                                 <div className='lineaTable' />
                                             </div>
@@ -190,9 +210,9 @@ export const Cotizacion = ({ setDatos, rolData }) => {
                                                     value={rol.rol}
                                                     onChange={(e) => handleChangeRol(e, index)}
                                                     required
-                                                    defaultValue={'Default'}
+                                                    // defaultValue={'Default'}
                                                 >
-                                                    <option value='Default' disabled >Selecciona el Rol</option>
+                                                    <option value='Default' hidden >Selecciona el Rol</option>
                                                     {
                                                         rolDropdown.map(({ role, id_role }) => (
                                                             <option key={id_role}
@@ -230,9 +250,9 @@ export const Cotizacion = ({ setDatos, rolData }) => {
                                     <div className='lineaTable' />
                                     <div className='footerContainerEdit'>
                                         <div>
-                                            {sum === Number.parseFloat(effort) ? <button className='buttonSave' onClick={() => setModalShow(true)}>Guardar</button> :
+                                            {(validar) ? <button className='buttonSave' onClick={() => setModalShow(true)}>Guardar</button> :
                                                 (<button
-                                                    className='buttonSave'
+                                                    className='buttonSaveDisable'
                                                     disabled
                                                 >Guardar</button>)}
                                         </div>

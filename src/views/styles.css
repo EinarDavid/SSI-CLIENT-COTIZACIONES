@@ -312,6 +312,22 @@ h1{
     color: #FFFFFF;
  }
 
+ .buttonSaveDisable{
+    background: gray;
+    border-radius: 13px;
+    width: 250px;
+    height: 40px;
+    border: none;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 18px;
+    text-align: center;
+    color: #FFFFFF;
+ }
+
  .containerIconBusqueda{
     width: 462px;
     height: 400px;

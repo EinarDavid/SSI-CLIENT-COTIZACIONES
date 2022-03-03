@@ -5,14 +5,25 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
 
     // console.log('Detalleeee',setDetalle)
     // const [dataDetalle, setDataDetalle] = useState([]);
-    const { id_order, client, responsible, date, status, total_effort, project_code } = setDatos[0];
-    // const numero_cotizacion = '21321';
-    // const fecha = '12/02/2021';
-    // const cliente = 'Ivar Carrasco';
-    // const responsable = 'Lorena Lopez';
+    const { id_order, client, responsible, date, total_effort } = setDatos[0];
+    // const { id_order, client, responsible, date, status, total_effort, project_code } = setDatos[0];
+   
     var detalle = [];
     detalle = setDetalle;
+    // console.log(date.split('-'));
 
+    const ConvertDate = (sqlDate) =>{
+        var sqlDateArr1 = sqlDate.split("-");
+        var sYear = sqlDateArr1[0];
+        var sMonth = (Number(sqlDateArr1[1]) ).toString();
+        var sqlDateArr2 = sqlDateArr1[2].split("T");
+        var sDay = sqlDateArr2[0];
+        var fecha = `${sYear}-${sMonth}-${sDay}`;
+
+        return (fecha);
+    }
+
+    // console.log('Dateeee', ConvertDate(date));
 
     return (
         <div>
@@ -20,7 +31,7 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
             <div className='containerCotizacion'>
             <div className='DatosNumberFecha'>
                 <h2 className='NumberCotizacion'>Cotizacion: {id_order} </h2>
-                <p className='FechaCreacion'>Creado: {date} </p>
+                <p className='FechaCreacion'>Creado: {ConvertDate(date)} </p>
             </div>
             <hr></hr>
             <div className='containerDatos'>
@@ -34,7 +45,7 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
                 </div>
                 <div className='Horas'>
                     <p className='Title'>Horas</p>
-                    <p className='Desctiption'>{total_effort}</p>
+                    <p className='Desctiption'>{Number(total_effort)}</p>
                 </div>
             </div>
             <div style={{ height: '15px' }}></div>
@@ -51,7 +62,7 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
                             <div key={i}>
                                 <div className='containerTable' >
                                     <p className='tableRol'>{det.role}</p>
-                                    <p className='tableHora'>{det.effort}</p>
+                                    <p className='tableHora'>{Number(det.effort)}</p>
                                 </div>
                                 <div className='lineaTable'/>
                                 

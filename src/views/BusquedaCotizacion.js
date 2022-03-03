@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Busqueda } from '../components/Busqueda';
 import { BusquedaNoExiste } from '../components/BusquedaNoExiste';
 import { Cotizacion } from '../components/Cotizacion';
 import { CotizacionView } from '../components/CotizacionView';
+import { CotizacionEdit } from '../components/CotizacionEdit';
 
 import { Modal } from 'react-bootstrap';
 import './styles.css';
@@ -14,8 +15,11 @@ export const BusquedaCotizacion = () => {
     const [number, setNumber] = useState('');
     const [cotizacionesVista, setCotizacionesVista] = useState([{ state: '' }]);
     const [cotizaciones, setCotizaciones] = useState([{ status: '' }]);
+    // const [cotizaciones, setCotizaciones] = useState([]);
     const [detalle, setDetalle] = useState([]);
-    const [rolData, setRolData] = useState([])
+    const [rolData, setRolData] = useState([]);
+    // const [searchEnable, setSearchEnable] = useState(false);
+
 
     const urlServer = 'http://localhost:4000';
 
@@ -41,11 +45,14 @@ export const BusquedaCotizacion = () => {
                 // console.log('DataCooot', datacotizacion)
                 setCotizaciones(datacotizacion);
 
+
                 if (datacotizacion[0].status !== 'null') {
+
                     const url2 = `${urlServer}/ssiCotizacionDetalle/${datacotizacion[0].id_quotation}`
                     const resp2 = await fetch(url2);
                     const datadetalle = await resp2.json();
                     setDetalle(datadetalle)
+                    // console.log('Entro a Handle Submit', datadetalle)
                 }
 
             }
@@ -59,6 +66,28 @@ export const BusquedaCotizacion = () => {
         setNumber(e.target.value);
     }
 
+    useEffect(async () => {
+        if (cotizaciones[0].status === 'BLOCKED' || cotizaciones[0].status === 'EDIT') {
+
+
+            const url2 = `${urlServer}/ssiCotizacionDetalle/${cotizaciones[0].id_quotation}`
+            const resp2 = await fetch(url2, {
+                method: 'GET',
+            });
+            const datadetalle = await resp2.json();
+
+            // console.log('Entro Aqui', JSON.stringify(datadetalle));
+            setDetalle(datadetalle)
+
+        }
+
+
+    }, [cotizaciones])
+
+    // console.log('Cotizaciones', cotizaciones);
+    // console.log('Detalle', detalle);
+    // console.log('Stado Padre', cotizaciones[0].status);
+
 
     return (
         <>
@@ -70,7 +99,7 @@ export const BusquedaCotizacion = () => {
 
                         <div >
                             {
-                                (cotizaciones[0].status !== 'null') ?
+                                (cotizaciones[0].status !== 'null' && cotizaciones[0].status !== 'EDIT') ?
                                     (<form className='formInputSearch' onSubmit={handleSubmit}>
                                         <input
                                             className='textInput'
@@ -102,7 +131,7 @@ export const BusquedaCotizacion = () => {
                                             >
                                             </input>
                                             <button
-                                            className='buttonX'
+                                                className='buttonX'
                                                 onClick={() => setModalShow(true)}
                                                 type='submit'
                                             ><img src='./images/icons/Cancelar.svg' width={30} alt='Enviar'></img>
@@ -117,9 +146,9 @@ export const BusquedaCotizacion = () => {
                         {
                             cotizacionesVista.map((cot, i) => {
                                 // console.log('Estado Cot', cot.state);
-                                return (cot.state !== 'null' && cotizaciones[0].status === 'null') ? (<Cotizacion setDatos={cotizacionesVista} rolData={rolData} key={i} />) :
+                                return (cot.state !== 'null' && cotizaciones[0].status === 'null') ? (<Cotizacion setDatos={cotizacionesVista} rolData={rolData} setCotizaciones={setCotizaciones} cotizaciones={cotizaciones} detalle={detalle} key={i} />) :
                                     (cot.state !== 'null' && cotizaciones[0].status === 'BLOCKED') ? (<CotizacionView key={i} setDatos={cotizaciones} setDetalle={detalle} />) :
-                                        (cot.state !== 'null' && cotizaciones[0].status === 'EDIT') ? (<p>Añadir para editar</p>) :
+                                        (cot.state !== 'null' && cotizaciones[0].status === 'EDIT') ? (<CotizacionEdit key={i} setDetalle={detalle} rolData={rolData} cotizaciones={cotizaciones} setCotizaciones={setCotizaciones} />) :
                                             (cot.state === 'null') ? (<BusquedaNoExiste key={i} />) : (<Busqueda key={i} />)
                             })
                         }
