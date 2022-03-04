@@ -143,13 +143,13 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
         <div>
             <div className='containerMainData'>
                 <div className='quotePrimeData'>
-                <div className='halfWidth'>
+                    <div className='halfWidth'>
 
-                    <h2 className='NumberCotizacion'>Cotizacion: {sale_order} </h2>
+                        <h2 className='NumberCotizacion'>Cotizacion: {sale_order} </h2>
                     </div>
                     <div className='halfWidth'>
 
-                    <p className='FechaCreacion'>Creado: {fechaActual} </p>
+                        <p className='FechaCreacion'>Creado: {fechaActual} </p>
                     </div>
 
                 </div>
@@ -183,8 +183,8 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
                         {
                             rol.map((rol, index) => (
                                 <div
-                                className='rowContainer'
-                                key={index}
+                                    className='rowContainer'
+                                    key={index}
                                 // style={{ display: 'flex' }}
                                 >
 
@@ -252,7 +252,7 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
                 aria-labelledby="contained-modal-title-vcenter"
                 centered>
                 <Modal.Body>
-                <p className='texto_popup'>Confirma que quieres guardar los cambios. Revisa bien antes de guardar ya que <strong>no podrás editar esta cotización después.</strong></p>
+                    <p className='texto_popup'>Confirma que quieres guardar los cambios. Revisa bien antes de guardar ya que <strong>no podrás editar esta cotización después.</strong></p>
                     <div className='popup_button_container'>
                         <form className='boton_salir_container' onSubmit={handleSubmit}>
                             <button className='buttonBlue'>Guardar</button>

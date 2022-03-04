@@ -21,6 +21,17 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
         return (sum)
     });
 
+    const ConvertDate = (sqlDate) => {
+        var sqlDateArr1 = sqlDate.split("-");
+        var sYear = sqlDateArr1[0];
+        var sMonth = (Number(sqlDateArr1[1])).toString();
+        var sqlDateArr2 = sqlDateArr1[2].split("T");
+        var sDay = sqlDateArr2[0];
+        var fecha = `${sYear}-${sMonth}-${sDay}`;
+
+        return (fecha);
+    }
+
     const addInputs = (e) => {
         e.preventDefault();
 
@@ -147,12 +158,12 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
         <div>
             <div className='containerMainData'>
                 <div className='quotePrimeData'>
-                <div className='halfWidth'>
-                    <h2 className='NumberCotizacion'>Cotizacion: {cotizaciones[0].id_order} </h2>
+                    <div className='halfWidth'>
+                        <h2 className='NumberCotizacion'>Cotizacion: {cotizaciones[0].id_order} </h2>
                     </div>
                     <div className='halfWidth'>
 
-                    <p className='FechaCreacion'>Creado: {cotizaciones[0].date} </p>
+                        <p className='FechaCreacion'>Creado: {ConvertDate(cotizaciones[0].date)} </p>
                     </div>
                 </div>
                 <hr></hr>
@@ -179,48 +190,48 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
                 </div>
                 <div className='containerTableEdit' >
                     {
-                            detalle.map((det, i) => {
-                                return (
-                                    <div className='rowContainer' key={i} style={{ display: 'flex' }}>
+                        detalle.map((det, i) => {
+                            return (
+                                <div className='rowContainer' key={i} style={{ display: 'flex' }}>
 
-                                        <select
-                                            className='inputCell inputRole'
-                                            value={det.role}
-                                            onChange={(e) => handleChangeRol(e, i)}
-                                            required
-                                        // defaultValue={'Default'}
-                                        >
-                                            <option value='Default' hidden >--Rol no definido--</option>
-                                            {
-                                                rolDropdown.map(({ role, id_role }) => (
-                                                    <option key={id_role}
-                                                        value={role}
+                                    <select
+                                        className='inputCell inputRole'
+                                        value={det.role}
+                                        onChange={(e) => handleChangeRol(e, i)}
+                                        required
+                                    // defaultValue={'Default'}
+                                    >
+                                        <option value='Default' hidden >--Rol no definido--</option>
+                                        {
+                                            rolDropdown.map(({ role, id_role }) => (
+                                                <option key={id_role}
+                                                    value={role}
 
-                                                    >{role}</option>
-                                                ))
-                                            }
-                                        </select>
-                                        <input
-                                            className='inputCell inputHours'
-                                            type='text'
-                                            name='esfuerzo'
-                                            placeholder='Hora'
-                                            value={Number(det.effort)}
-                                            onChange={(e) => handleChangeHora(e, i)}
-                                            onKeyPress={(e) => valideKey(e)}
+                                                >{role}</option>
+                                            ))
+                                        }
+                                    </select>
+                                    <input
+                                        className='inputCell inputHours'
+                                        type='text'
+                                        name='esfuerzo'
+                                        placeholder='Hora'
+                                        value={Number(det.effort)}
+                                        onChange={(e) => handleChangeHora(e, i)}
+                                        onKeyPress={(e) => valideKey(e)}
 
-                                        ></input>
-                                        <button
-                                            className='buttonRemoveRow'
-                                            style={{ marginLeft: '5px' }}
-                                            onClick={() => { handleRemoveInputRol(i) }}
-                                        >-</button>
+                                    ></input>
+                                    <button
+                                        className='buttonRemoveRow'
+                                        style={{ marginLeft: '5px' }}
+                                        onClick={() => { handleRemoveInputRol(i) }}
+                                    >-</button>
 
-                                        {/* <div className='lineaTable' /> */}
+                                    {/* <div className='lineaTable' /> */}
 
-                                    </div>
-                                )
-                            }) 
+                                </div>
+                            )
+                        })
                     }
                     <div className='buttonAddContainer'>
                         <button onClick={addInputs} className='buttonAdd'>Click aquí para añadir un nuevo rol</button>
@@ -247,12 +258,12 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
                 aria-labelledby="contained-modal-title-vcenter"
                 centered>
                 <Modal.Body>
-                    <p>Confirma que quieres guardar los cambios</p>
-                    <div>
-                        <button onClick={() => setModalShow(false)}>Cancelar</button>
-                        <form onSubmit={handleSubmit}>
-                            <button>Guardar</button>
+                    <p className='texto_popup'>Confirma que quieres guardar los cambios. Revisa bien antes de guardar ya que <strong>no podrás editar esta cotización después.</strong></p>
+                    <div className='popup_button_container'>
+                        <form className='boton_salir_container' onSubmit={handleSubmit}>
+                            <button className='buttonBlue'>Guardar</button>
                         </form>
+                        <button className='buttonGrey' onClick={() => setModalShow(false)}>Cancelar</button>
                     </div>
                 </Modal.Body>
             </Modal>
