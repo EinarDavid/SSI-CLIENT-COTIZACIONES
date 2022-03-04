@@ -145,28 +145,32 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
 
     return (
         <div>
-            <div style={{ height: '10px' }}></div>
-            <div className='containerCotizacion'>
-                <div className='DatosNumberFecha'>
+            <div className='containerMainData'>
+                <div className='quotePrimeData'>
+                <div className='halfWidth'>
                     <h2 className='NumberCotizacion'>Cotizacion: {cotizaciones[0].id_order} </h2>
+                    </div>
+                    <div className='halfWidth'>
+
                     <p className='FechaCreacion'>Creado: {cotizaciones[0].date} </p>
+                    </div>
                 </div>
                 <hr></hr>
                 <div className='containerDatos'>
-                    <div className='Cliente'>
-                        <p className='Title'>Cliente</p>
-                        <p className='Desctiption'>{cotizaciones[0].client}</p>
-                    </div>
                     <div className='Responsable'>
                         <p className='Title'>Responsable</p>
                         <p className='Desctiption'>{cotizaciones[0].responsible}</p>
+                    </div>
+                    <div className='Cliente'>
+                        <p className='Title'>Cliente</p>
+                        <p className='Desctiption'>{cotizaciones[0].client}</p>
                     </div>
                     <div className='Horas'>
                         <p className='Title'>Horas</p>
                         <p className='Desctiption'>{Number(cotizaciones[0].total_effort)}</p>
                     </div>
                 </div>
-                <div style={{ height: '15px' }}></div>
+                {/* <div style={{ height: '15px' }}></div> */}
                 <div className='titleTable'>
                     <section className='titleContainer'>
                         <p className='titleRol'>Rol</p>
@@ -177,9 +181,10 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
                     {
                             detalle.map((det, i) => {
                                 return (
-                                    <div key={i} style={{ display: 'flex' }}>
+                                    <div className='rowContainer' key={i} style={{ display: 'flex' }}>
 
                                         <select
+                                            className='inputCell inputRole'
                                             value={det.role}
                                             onChange={(e) => handleChangeRol(e, i)}
                                             required
@@ -196,7 +201,7 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
                                             }
                                         </select>
                                         <input
-                                            //Añadir CLase de CSS
+                                            className='inputCell inputHours'
                                             type='text'
                                             name='esfuerzo'
                                             placeholder='Hora'
@@ -206,7 +211,7 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
 
                                         ></input>
                                         <button
-                                            //Añadir CLase de CSS
+                                            className='buttonRemoveRow'
                                             style={{ marginLeft: '5px' }}
                                             onClick={() => { handleRemoveInputRol(i) }}
                                         >-</button>
@@ -218,20 +223,20 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
                             }) 
                     }
                     <div className='buttonAddContainer'>
-                        <button onClick={addInputs} className='buttonAdd'>Click aqui o presiona Shift + Enter para añadir un nuevo rol</button>
+                        <button onClick={addInputs} className='buttonAdd'>Click aquí para añadir un nuevo rol</button>
                     </div>
                 </div>
                 <div>
                     <div className='lineaTable' />
                     <div className='footerContainerEdit'>
                         <div>
-                            {(validar) ? <button className='buttonSave' onClick={() => setModalShow(true)}>Guardar</button> :
+                            {(validar) ? <button className='buttonBlue' onClick={() => setModalShow(true)}>Guardar</button> :
                                 (<button
-                                    className='buttonSaveDisable'
+                                    className='buttonBlue'
                                     disabled
                                 >Guardar</button>)}
                         </div>
-                        {sum === Number.parseFloat(cotizaciones[0].total_effort) ? <p>Total hrs: {sum} ( Icon)</p> : <p style={{ color: '#FF5574' }}>Total hrs: {sum}</p>}
+                        {sum === Number.parseFloat(cotizaciones[0].total_effort) ? <p>Total hrs: {sum} <img src='./images/icons/check.svg' width={16} alt='Total correcto'></img></p> : <p style={{ color: '#FF5574' }}>Total hrs: {sum}</p>}
 
                     </div>
                 </div>

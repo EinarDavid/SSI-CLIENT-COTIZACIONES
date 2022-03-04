@@ -28,7 +28,7 @@ export const FormBusqueda = ({ setNumber }) => {
         <div className='formInputSearch'>
             <form onSubmit={handleSubmit}>
                 <input
-                    className='textInput'
+                    className='textInputSearch'
                     name='buscar'
                     type='text'
                     placeholder='Ingresa un número de cotización'

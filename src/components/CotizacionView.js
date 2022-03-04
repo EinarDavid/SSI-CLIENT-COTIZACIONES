@@ -27,28 +27,32 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
 
     return (
         <div>
-            <div style={{ height:'10px' }}></div>
-            <div className='containerCotizacion'>
-            <div className='DatosNumberFecha'>
+            <div className='containerMainData'>
+            <div className='quotePrimeData'>
+                <div className='halfWidth'>
                 <h2 className='NumberCotizacion'>Cotizacion: {id_order} </h2>
+                </div>
+                <div className='halfWidth'>
                 <p className='FechaCreacion'>Creado: {ConvertDate(date)} </p>
-            </div>
+                </div>
+
+           </div>
             <hr></hr>
             <div className='containerDatos'>
-                <div className='Cliente'>
-                    <p className='Title'>Cliente</p>
-                    <p className='Desctiption'>{client}</p>
-                </div>
                 <div className='Responsable'>
                     <p className='Title'>Responsable</p>
                     <p className='Desctiption'>{responsible}</p>
+                </div>
+                <div className='Cliente'>
+                    <p className='Title'>Cliente</p>
+                    <p className='Desctiption'>{client}</p>
                 </div>
                 <div className='Horas'>
                     <p className='Title'>Horas</p>
                     <p className='Desctiption'>{Number(total_effort)}</p>
                 </div>
             </div>
-            <div style={{ height: '15px' }}></div>
+            {/* <div style={{ height: '15px' }}></div> */}
             <div className='titleTable'>
                 <section className='titleContainer'>
                     <p className='titleRol'>Rol</p>
@@ -61,8 +65,8 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
                         return(
                             <div key={i}>
                                 <div className='containerTable' >
-                                    <p className='tableRol'>{det.role}</p>
-                                    <p className='tableHora'>{Number(det.effort)}</p>
+                                    <p className='tableRole'>{det.role}</p>
+                                    <p className='tableHours'>{Number(det.effort)}</p>
                                 </div>
                                 <div className='lineaTable'/>
                                 
@@ -75,7 +79,7 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
             <div className='lineaTable'/>
                 <div className='footerContainer'>
                     {/* <div><button>Icon</button></div> */}
-                    <p className='footerHoras'>Total hrs: {total_effort} (Añadir Icon)</p>
+                    <p className='footerHoras'>Total hrs: {total_effort}  <img src='./images/icons/check.svg' width={16} alt='Total correcto'/></p>
                 </div>
             </div>
         </div>

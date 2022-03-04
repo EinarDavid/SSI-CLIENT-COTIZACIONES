@@ -1,3 +1,33 @@
+@font-face {
+    font-family: Roboto-Bold;
+    src: url('../../public/fonts/Roboto-Bold-webfont.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: Roboto-BoldItalic;
+    /* src: url('Roboto-BoldItalic-webfont.woff') format('woff'),; */
+    src: url('../../public/fonts/Roboto-BoldItalic-webfont.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: Roboto-Medium;
+    src: url('../../public/fonts/Roboto-Medium-webfont.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: Roboto-MediumItalic;
+    src: url('../../public/fonts/Roboto-MediumItalic-webfont.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: Roboto-Regular;
+    src: url('../../public/fonts/Roboto-Regular-webfont.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: Roboto-Italic;
+    src: url('../../public/fonts/Roboto-Italic-webfont.woff') format('woff');
+  }
 
 .containerGeneral{
     /* background-color: #20C197; */
@@ -5,9 +35,11 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow-y: scroll;
+
 }
 h1{
-    font-family: Roboto-Bold;
+    font-family: 'Roboto-Bold';
     font-style: normal;
     font-weight: bold;
     font-size: 34px;
@@ -24,6 +56,16 @@ h1{
     margin-top: 60px;
 }
 
+.card_container_parent{
+    height: 100vh;
+    background-color: #EFF4F6;
+    display: flex;
+}
+
+.card_container{
+    margin: auto auto;    
+}
+
 .card-white{
     /* width: 50%; */
     width: 542px;
@@ -34,50 +76,176 @@ h1{
     background: #FFFFFF;
     border-radius: 26px;
 }
+
 .formInputSearch{
     text-align: center;
-    /* background-color: red; */
+}
+
+
+/* .formInputSearch{
+    text-align: center;
     width: 462px;
     justify-content: space-between;
     display: flex;
     margin-left: auto;
     margin-right: auto;
-}
+} */
 
-.textInput{
+.textInputSearch{
     background: #EFF4F6;
-    border-radius: 10px;
-    width: 414px;
+    border-radius: 8px;
+    width: 424px;
     height: 40px;
-    font-family: Roboto-Regular;
+    font-family: 'Roboto-Regular';
     font-style: normal;
     font-weight: normal;
     font-size: 15px;
     line-height: 18px;
     padding-left: 20px;
     border: none;
+    outline-color:rgb(105, 150, 189);
     color: #454545;
 }
-.textInput::placeholder{
+.textInputSearch:hover{
+    background: #e6eef0;
+}
+
+.textInputSearch::placeholder{
     color: #9F9F9F;
 }
 
-.textInputDisabled{
+.textInputSearchDisabled{
     background: #FFFFFF;
     border: 1px solid #EAEAEA;
     border-radius: 10px;
     width: 414px;
     height: 40px;
-    font-family: Roboto-Regular;
+    font-family: 'Roboto-Regular';
     font-style: normal;
     font-weight: normal;
     font-size: 15px;
     line-height: 18px;
     padding-left: 20px;
 }
-.textInputDisabled::placeholder{
+.textInputSearchDisabled::placeholder{
     color: #9F9F9F;
 }
+
+/* ---------BOTONES----------- */
+
+/* boton buscar */
+
+.buttonSearch{
+    margin: 0;
+    padding: 0;
+    min-width: 40px;
+    min-height: 40px;
+    max-height: 40px;
+    border-radius: 8px;
+    background-color: #2781B8;
+    border-width: 0;
+    color: white;
+    text-align: center;
+}
+.buttonSearch:hover{
+    background-color: #3795d0;
+    box-shadow: 0px 5px 14px -7px #276873;
+}
+.buttonSearch:active{
+    background-color: #1b6da0;
+}
+.buttonSearch:disabled{
+    background-color: #ffffff;
+    color: #b6b6b6;
+    border: 1px solid #C7D1E2;
+}
+
+/* boton azul grande */
+
+.buttonBlue{
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    min-width: 40px;
+    min-height: 40px;
+    max-height: 40px;
+    border-radius: 8px;
+    background-color: #2781B8;
+    border-width: 0;
+    color: white;
+    text-align: center;
+}
+.buttonBlue:hover{
+    background-color: #3795d0;
+    box-shadow: 0px 5px 14px -7px #276873;
+}
+.buttonBlue:active{
+    background-color: #1b6da0;
+}
+.buttonBlue:disabled{
+    background-color: #ffffff;
+    color: #b6b6b6;
+    border: 1px solid #C7D1E2;
+    box-shadow: none;
+}
+
+/* boton rojo grande */
+
+.buttonRed{
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    min-width: 40px;
+    min-height: 40px;
+    max-height: 40px;
+    border-radius: 8px;
+    background-color: #FF414D;
+    border-width: 0;
+    color: white;
+    text-align: center;
+}
+.buttonRed:hover{
+    background-color: #ff535f;
+    box-shadow: 0px 5px 14px -7px #f5607c;
+}
+.buttonRed:active{
+    background-color: #d53843;
+}
+.buttonRed:disabled{
+    background-color: #ffffff;
+    color: #b6b6b6;
+    border: 1px solid #C7D1E2;
+}
+
+/* boton gris grande */
+
+.buttonGrey{
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    min-width: 40px;
+    min-height: 40px;
+    max-height: 40px;
+    border-radius: 8px;
+    background-color: #e6e6e6;
+    border-width: 0;
+    color: #1c1c1c;
+    text-align: center;
+}
+.buttonGrey:hover{
+    background-color: #eeeeee;
+    box-shadow: 0px 5px 14px -7px #b0b0b0;
+}
+.buttonGrey:active{
+    background-color: #e4e4e4;
+}
+.buttonGrey:disabled{
+    background-color: #ffffff;
+    color: #b6b6b6;
+    border: 1px solid #C7D1E2;
+}
+
+/* otros botones */
 
 .buttonEnviar{
     background: #2781B8;
@@ -94,55 +262,110 @@ h1{
     width: 40px;
     height: 40px;
 }
+.buttonX:hover{
+    box-shadow: 0px 5px 14px -7px #3e3e3e;
+}
+
+
+.buttonSave{
+    background: #2781B8;
+    border-radius: 13px;
+    width: 250px;
+    height: 40px;
+    border: none;
+
+    font-family: 'Roboto-Bold';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 18px;
+    text-align: center;
+    color: #FFFFFF;
+ }
+
+ .buttonSaveDisable{
+    background: gray;
+    border-radius: 13px;
+    width: 250px;
+    height: 40px;
+    border: none;
+
+    font-family: 'Roboto-Bold';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 18px;
+    text-align: center;
+    color: #FFFFFF;
+ }
+
+
+/* ------ESPACIOS Y ALINEACION-------- */
+
+.leftSpace{
+    margin-left: 10px;
+}
+
+hr{
+    margin: 0;
+    padding: 0;
+    height: 1px;
+    background-color: rgb(182, 179, 179);
+    border: none;
+}
+
 
 /* HeaderCotizacion */
 
-.DatosNumberFecha{
-    justify-content: space-between;
+.halfWidth{
+    width: 50%;
+}
+
+.quotePrimeData{
     display: flex;
+    justify-content: center;
     align-items: center;
-    width: 462px;
-    /* background-color: aqua; */
+    width: 475px;
+    height: 48px;
     margin-left: auto;
     margin-right: auto;
-    /* height: 23px; */
 }
 .NumberCotizacion{
-    font-family: Roboto-Regular;
-    font-style: normal;
-    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto-Regular';
     font-size: 20px;
-    line-height: 23px;
-
     color: #000000;
-    margin-top: auto;
-    margin-bottom: auto;
 }
 .FechaCreacion{
-    font-family: Roboto-Italic;
-    font-style: italic;
-    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto-Italic';
     font-size: 15px;
-    line-height: 18px;
+    line-height: 15px;
     color: #000000;
-
-    margin-top: auto;
-    margin-bottom: auto;
+    text-align: right;
 }
 
 /* Datos del Header */
 .containerDatos{
-    justify-content: space-between;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 480px;
+    margin: 0 auto;
+    padding: 7px 0;
+
+    /*justify-content: space-between;
     display: flex;
     width: 462px;
-    /* background-color: gray; */
     margin-left: auto;
     margin-right: auto;
-    margin-top: -5px;
+    margin-top: -5px; */
 }
 
 .Title{
-    font-family: Roboto-Bold;
+    font-family: 'Roboto-Bold';
     font-style: normal;
     font-weight: bold;
     font-size: 13px;
@@ -154,7 +377,7 @@ h1{
 .Desctiption{
     margin-top: -12px;
     /* background-color: #2781B8; */
-    font-family: Roboto-Regular;
+    font-family: 'Roboto-Regular';
     font-style: normal;
     font-weight: normal;
     font-size: 15px;
@@ -165,54 +388,65 @@ h1{
 }
 
 .Cliente{
-    /* background-color: blueviolet; */
-    width: 21%;
-    height: 34px;  
+    width: 30%;
+    height: 40px;
+    margin: 0;
+    padding: 0 15px;
+    overflow:hidden;
 }
 .Responsable{
-    width: 66%;
-    /* background-color: red; */
-    height: 34px; 
+    width: 60%;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    overflow:hidden;
 }
 .Horas{
-    width: 13%;
-    height: 34px; 
-    /* background-color: #20C197; */
+    width: 10%;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    text-align: right;
  }
 
  /* Table */
  .titleTable{
+     padding: 10px 0;
     background: #C7D1E2;
     /* height: 40px; */
  }
  .titleContainer{
     justify-content: space-between;
     display: flex;
-    /* align-items: center; */
+    width: 482px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    /*justify-content: space-between;
+    display: flex;
     width: 462px;
     margin-left: auto;
     margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
-    height: 40px;
-
+    height: 40px; */
     /* background-color: rebeccapurple; */
  }
 .titleRol{
     /* background-color: #20C197; */
-    margin-top: auto;
-    margin-bottom: auto;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 .titleHora{
     /* background-color: #20C197; */
-    margin-top: auto;
-    margin-bottom: auto;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
  .titleContainer p{
      text-align:justify;
      /* background-color: red; */
-     font-family: Roboto-Bold;
+     font-family: 'Roboto-Bold';
      font-style: normal;
      font-weight: bold;
      font-size: 15px;
@@ -223,24 +457,24 @@ h1{
  .containerTable{
      /* background-color: red; */
      justify-content: space-between;
-     align-items: center;
      display: flex;
-     width: 462px;
-     height: 40px;
-     margin-left: auto;
-     margin-right: auto;
+     width: 542px;
+     height: 32px;
+     padding-left: 32px;
+     padding-right: 32px;
+     margin: 0;
 
  }
- .tableRol{
+ .tableRole{
     /* background-color: #2781B8; */
-    margin-top: auto;
-    margin-bottom: auto;
+    margin: 0;
+    display: inline-block;
  }
- .tableHora{
+ .tableHours{
     /* background-color: #2781B8; */
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-right: 30px;
+    margin: 0;
+    display: inline-block;
+
  }
 
  .lineaTable{
@@ -248,6 +482,58 @@ h1{
     height: 1px;
     background-color: #EAEAEA;
  }
+
+ /* --------- INPUTS DE LA TABLA ------------- */
+ .inputCell{
+    background: #ffffff;
+    border-radius: 8px;
+    height: 28px;
+    font-family: 'Roboto-Regular';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    /* line-height: 18px; */
+    padding-left: 20px;
+    border: 1px solid #dee3e4;
+    outline-color:rgb(105, 150, 189);
+    margin-right: 5px;
+}
+
+ .inputHours{
+    width: 72px;
+    padding-left: 8px;
+    padding-right: 8px;
+    text-align: center;
+}
+
+.inputRole{
+    width: 400px;
+    padding-left: 8px;
+    cursor: inherit;
+}
+.rowContainer{
+    height: 36px;
+    display: flex;
+    padding: 0 30px;
+}
+
+.buttonRemoveRow{
+    margin: 0;
+    padding: 0;
+    min-width: 28px;
+    min-height: 28px;
+    max-height: 28px;
+    border-radius: 8px;
+    background-color: #EFF0F8;
+    border-width: 0;
+    color: #454545;
+    text-align: center;
+}
+.buttonRemoveRow:hover{
+    background-color: #f5f5f5;
+    box-shadow: 0px 5px 14px -7px #b0b0b0;
+}
+
 
  /* Footer */
  .footerContainer{
@@ -262,7 +548,7 @@ h1{
  }
  
  .footerContainer p{
-    font-family: Roboto-Bold;
+    font-family: 'Roboto-Bold';
     font-style: normal;
     font-weight: bold;
     font-size: 18px;
@@ -284,7 +570,7 @@ h1{
     margin-top: 12px;
  }
  .footerContainerEdit p{
-    font-family: Roboto-Bold;
+    font-family: 'Roboto-Bold';
     font-style: normal;
     font-weight: bold;
     font-size: 18px;
@@ -296,37 +582,6 @@ h1{
     
  }
 
- .buttonSave{
-    background: #2781B8;
-    border-radius: 13px;
-    width: 250px;
-    height: 40px;
-    border: none;
-
-    font-family: Roboto-Bold;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 15px;
-    line-height: 18px;
-    text-align: center;
-    color: #FFFFFF;
- }
-
- .buttonSaveDisable{
-    background: gray;
-    border-radius: 13px;
-    width: 250px;
-    height: 40px;
-    border: none;
-
-    font-family: Roboto-Bold;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 15px;
-    line-height: 18px;
-    text-align: center;
-    color: #FFFFFF;
- }
 
  .containerIconBusqueda{
     width: 462px;
@@ -347,28 +602,26 @@ h1{
     text-align: center;
  }
  .buttonAdd{
-    width: 446px;
+    width: 482px;
     height: 30px;
     background: #FFFFFF;
-    border: 1px solid #EAEAEA;
+    border: 1px solid #008eae;
     box-sizing: border-box;
     border-radius: 10px;
-
-    font-family: Roboto-Regular;
+    font-family: 'Roboto-Regular';
     font-style: normal;
     font-weight: normal;
     font-size: 15px;
     line-height: 18px;
-
     text-align: center;
-
-    color: #9F9F9F;
+    color: #0078b8;
  }
  
 .containerTableEdit{
-    /* background-color: #20C197; */
-    height: 230px;
-    overflow-y: scroll;
+    background-color: #ffffff   ;
+    padding-top: 10px;
+    height: 250px;
+    overflow-y:scroll;
 }
 
 /* Boton de DropDown */
@@ -385,3 +638,23 @@ h1{
     background-color: transparent;
     border: none;
 }
+
+/* ------- POPUP ---------- */
+
+.popup_button_container{
+    /* display: flex; */
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    position: relative;
+    }
+
+.boton_salir_container{
+    display: inline-block;
+    margin-right: 16px;
+    }
+
+.texto_popup{
+    text-align: center;
+    padding-bottom: 20px;
+    }
