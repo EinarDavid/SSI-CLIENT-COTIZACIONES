@@ -139,7 +139,7 @@ export const BusquedaCotizacion = () => {
                                                 className='buttonX leftSpace'
                                                 onClick={() => setModalShow(true)}
                                                 type='submit'
-                                            ><img src='./images/icons/Cancelar.svg' width={30} alt='Enviar'></img>
+                                            ><img className='imageButton' src='./images/icons/Cancelar.svg' width={30} alt='Enviar'></img>
                                             </button>
                                         </div>
                                     )
@@ -160,21 +160,7 @@ export const BusquedaCotizacion = () => {
                 </div>
             </div>
             <PopupSinForm trigger={modalShow} setTrigger={setModalShow} />
-            {/* <Modal
-                show={modalShow}
-                aria-labelledby="contained-modal-title-vcenter"
-                centered>
-                <Modal.Body>
-                    <p className='texto_popup'>Parece que no has guardado esta cotización, si sales se perderan los datos llenados hasta ahora, pero podrás volver a llenar la cotización después. ¿Seguro que quieres salir?</p>
-                    <div className='popup_button_container'>
-                        <form className='boton_salir_container'>
-                            <button className='buttonRed'>Salir sin guardar</button>
-                        </form>
-                        <button className='buttonGrey' onClick={() => setModalShow(false)}>Cancelar</button>
-
-                    </div>
-                </Modal.Body>
-            </Modal> */}
+            
         </>
     )
 }

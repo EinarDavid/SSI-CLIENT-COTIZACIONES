@@ -254,20 +254,7 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
                 </div>
             </div>
             <Popup trigger={modalShow} setTrigger={setModalShow} handleSubmit={handleSubmit} />
-            {/* <Modal
-                show={modalShow}
-                aria-labelledby="contained-modal-title-vcenter"
-                centered>
-                <Modal.Body>
-                    <p className='texto_popup'>Confirma que quieres guardar los cambios. Revisa bien antes de guardar ya que <strong>no podrás editar esta cotización después.</strong></p>
-                    <div className='popup_button_container'>
-                        <form className='boton_salir_container' onSubmit={handleSubmit}>
-                            <button className='buttonBlue'>Guardar</button>
-                        </form>
-                        <button className='buttonGrey' onClick={() => setModalShow(false)}>Cancelar</button>
-                    </div>
-                </Modal.Body>
-            </Modal> */}
+            
         </div>
     )
 }
