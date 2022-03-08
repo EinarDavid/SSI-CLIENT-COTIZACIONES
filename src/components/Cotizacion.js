@@ -149,7 +149,7 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
                     </div>
                     <div className='halfWidth'>
 
-                        <p className='FechaCreacion'>Creado: {fechaActual} </p>
+                        <p className='FechaCreacion'>Pendiente de llenado </p>
                     </div>
 
                 </div>
@@ -231,16 +231,18 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
                     </div>
                     <div>
                         <div className='lineaTable' />
-                        <div className='footerContainerEdit'>
-                            <div>
-                                {(validar) ? <button className='buttonBlue' onClick={() => setModalShow(true)}>Guardar</button> :
-                                    (<button
-                                        className='buttonBlue'
-                                        disabled
-                                    >Guardar</button>)}
-                            </div>
-                            {sum === Number.parseFloat(effort) ? <p>Total hrs: {sum} <img src='./images/icons/check.svg' width={16} alt='Total correcto'></img></p> : <p style={{ color: '#FF5574' }}>Total hrs: {sum}</p>}
+                        <div className='footerContainerEditPadre'>
+                            <div className='footerContainerEdit'>
+                                <div>
+                                    {(validar) ? <button className='buttonBlueGuardar' onClick={() => setModalShow(true)}>Guardar</button> :
+                                        (<button
+                                            className='buttonBlueGuardar'
+                                            disabled
+                                        >Guardar</button>)}
+                                </div>
+                                {sum === Number.parseFloat(effort) ? <p>Total hrs: {sum} <img src='./images/icons/check.svg' width={16} alt='Total correcto'></img></p> : <p style={{ color: '#FF5574' }}>Total hrs: {sum}</p>}
 
+                            </div>
                         </div>
                     </div>
                 </div>

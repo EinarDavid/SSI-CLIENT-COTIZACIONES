@@ -33,7 +33,7 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
                 <h2 className='NumberCotizacion'>Cotizacion: {id_order} </h2>
                 </div>
                 <div className='halfWidth'>
-                <p className='FechaCreacion'>Creado: {ConvertDate(date)} </p>
+                <p className='FechaCreacion'>Creado(AA-MM-DD): {ConvertDate(date)} </p>
                 </div>
 
            </div>
@@ -77,10 +77,13 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
             </div>
             <div>
             <div className='lineaTable'/>
+            <div className='footerContainerEditPadre'>
+                
                 <div className='footerContainer'>
                     {/* <div><button>Icon</button></div> */}
-                    <p className='footerHoras'>Total hrs: {total_effort}  <img src='./images/icons/check.svg' width={16} alt='Total correcto'/></p>
+                    <p className='footerHoras'>Total hrs: {Number(total_effort)} <img src='./images/icons/check.svg' width={16} style={{marginLeft:'5px'}} alt='Total correcto'/></p>
                 </div>
+            </div>
             </div>
         </div>
         

@@ -240,21 +240,24 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
                 </div>
                 <div>
                     <div className='lineaTable' />
-                    <div className='footerContainerEdit'>
-                        <div>
-                            {(validar) ? <button className='buttonBlue' onClick={() => setModalShow(true)}>Guardar</button> :
-                                (<button
-                                    className='buttonBlue'
-                                    disabled
-                                >Guardar</button>)}
-                        </div>
-                        {sum === Number.parseFloat(cotizaciones[0].total_effort) ? <p>Total hrs: {sum} <img src='./images/icons/check.svg' width={16} alt='Total correcto'></img></p> : <p style={{ color: '#FF5574' }}>Total hrs: {sum}</p>}
+                    <div className='footerContainerEditPadre'>
+                        <div className='footerContainerEdit'>
+                            <div>
+                                {(validar) ? <button className='buttonBlueGuardar' onClick={() => setModalShow(true)}>Guardar</button> :
+                                    (<button
+                                        className='buttonBlueGuardar'
+                                        disabled
+                                    >Guardar</button>)}
+                            </div>
+                            {sum === Number.parseFloat(cotizaciones[0].total_effort) ? <p>Total hrs: {sum} <img src='./images/icons/check.svg' width={16} alt='Total correcto'></img></p> : <p style={{ color: '#FF5574' }}>Total hrs: {sum}</p>}
 
+                        </div>
                     </div>
+
                 </div>
             </div>
             <Popup trigger={modalShow} setTrigger={setModalShow} handleSubmit={handleSubmit} />
-            
+
         </div>
     )
 }

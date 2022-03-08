@@ -169,10 +169,39 @@ h1{
 }
 /* boton azul grande */
 
-.buttonBlue{
+.buttonBlueGuardar{
     margin: 0;
     padding: 0;
     width: 200px;
+    min-width: 40px;
+    min-height: 40px;
+    max-height: 40px;
+    border-radius: 8px;
+    background-color: #2781B8;
+    border-width: 0;
+    color: white;
+    text-align: center;
+}
+.buttonBlueGuardar:hover{
+    background-color: #3795d0;
+    box-shadow: 0px 5px 14px -7px #276873;
+}
+.buttonBlueGuardar:active{
+    background-color: #1b6da0;
+}
+.buttonBlueGuardar:disabled{
+    background-color: #ffffff;
+    color: #b6b6b6;
+    border: 1px solid #C7D1E2;
+    box-shadow: none;
+}
+
+
+.buttonBlue{
+    margin: 0;
+    padding: 0;
+    /* width: 200px; */
+    width: 100%;
     min-width: 40px;
     min-height: 40px;
     max-height: 40px;
@@ -201,7 +230,8 @@ h1{
 .buttonRed{
     margin: 0;
     padding: 0;
-    width: 200px;
+    /* width: 200px; */
+    width: 100%;
     min-width: 40px;
     min-height: 40px;
     max-height: 40px;
@@ -229,7 +259,8 @@ h1{
 .buttonGrey{
     margin: 0;
     padding: 0;
-    width: 200px;
+    /* width: 200px; */
+    width: 45%;
     min-width: 40px;
     min-height: 40px;
     max-height: 40px;
@@ -558,7 +589,7 @@ hr{
     margin-left: auto;
     margin-right: auto;
     /* background-color: red; */
-    margin-top: 25px;
+    /* margin-top: 25px; */
  }
  
  .footerContainer p{
@@ -573,6 +604,13 @@ hr{
     margin-bottom: auto;
     
  }
+ .footerContainerEditPadre{
+    /* background-color: rgba(0, 0, 0, 0.2); */
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
  .footerContainerEdit{
     justify-content: space-between;
     display: flex;
@@ -581,7 +619,7 @@ hr{
     margin-left: auto;
     margin-right: auto;
     /* background-color: red; */
-    margin-top: 12px;
+    /* margin-top: 12px; */
  }
  .footerContainerEdit p{
     font-family: 'Roboto-Bold';
@@ -608,6 +646,12 @@ hr{
     display: flex;
     align-items: center;
     justify-content: center;
+ }
+ .footerHoras{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #0078b8; */
  }
 
  /* Tabla Editable */
@@ -637,7 +681,7 @@ hr{
     padding-left: 0;
     padding-right: 0;
     padding-bottom: 0;
-    height: 250px;
+    height: 235px;
     overflow-y: scroll;
     margin: 0;
 }
@@ -660,16 +704,20 @@ hr{
 /* ------- POPUP ---------- */
 
 .popup_button_container{
-    /* display: flex; */
+    display: flex;
+    justify-content: space-between;
+
     align-items: center;
     text-align: center;
     align-content: center;
     position: relative;
+    /* background-color: rebeccapurple; */
     }
 
 .boton_salir_container{
     display: inline-block;
-    margin-right: 16px;
+    /* margin-right: 16px; */
+    width: 45%;
     }
 
 .texto_popup{
@@ -697,5 +745,13 @@ hr{
     padding: 32px;
     width: 40%;
     background-color: #ffffff;
-    
+    border-radius: 26px;
+
   }  
+
+  @media only screen and (max-width: 900px) {
+    .popup_itself{
+        width: 60%;
+    }
+
+  }
