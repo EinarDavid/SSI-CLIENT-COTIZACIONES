@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Modal } from 'react-bootstrap';
+
+import Popup from './popup';
 
 export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizaciones }) => {
 
@@ -170,15 +171,15 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
                 <div className='containerDatos'>
                     <div className='Responsable'>
                         <p className='Title'>Responsable</p>
-                        <p className='Desctiption'>{cotizaciones[0].responsible}</p>
+                        <p className='Description'>{cotizaciones[0].responsible}</p>
                     </div>
                     <div className='Cliente'>
                         <p className='Title'>Cliente</p>
-                        <p className='Desctiption'>{cotizaciones[0].client}</p>
+                        <p className='Description'>{cotizaciones[0].client}</p>
                     </div>
                     <div className='Horas'>
                         <p className='Title'>Horas</p>
-                        <p className='Desctiption'>{Number(cotizaciones[0].total_effort)}</p>
+                        <p className='Description'>{Number(cotizaciones[0].total_effort)}</p>
                     </div>
                 </div>
                 {/* <div style={{ height: '15px' }}></div> */}
@@ -252,8 +253,8 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
                     </div>
                 </div>
             </div>
-
-            <Modal
+            <Popup trigger={modalShow} setTrigger={setModalShow} handleSubmit={handleSubmit} />
+            {/* <Modal
                 show={modalShow}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered>
@@ -266,7 +267,7 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
                         <button className='buttonGrey' onClick={() => setModalShow(false)}>Cancelar</button>
                     </div>
                 </Modal.Body>
-            </Modal>
+            </Modal> */}
         </div>
     )
 }

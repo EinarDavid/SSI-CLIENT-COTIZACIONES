@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { Modal } from 'react-bootstrap';
+import Popup from './popup';
 
 
 export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, detalle }) => {
@@ -157,15 +157,15 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
                 <div className='containerDatos'>
                     <div className='Responsable'>
                         <p className='Title'>Responsable</p>
-                        <p className='Desctiption'>{login}</p>
+                        <p className='Description'>{login}</p>
                     </div>
                     <div className='Cliente'>
                         <p className='Title'>Cliente</p>
-                        <p className='Desctiption'>{partner_name}</p>
+                        <p className='Description'>{partner_name}</p>
                     </div>
                     <div className='Horas'>
                         <p className='Title'>Horas</p>
-                        <p className='Desctiption'>{Number.parseFloat(effort)}</p>
+                        <p className='Description'>{Number.parseFloat(effort)}</p>
                     </div>
                 </div>
 
@@ -246,8 +246,10 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
                 </div>
 
             </div>
+            <Popup trigger={modalShow} setTrigger={setModalShow} handleSubmit={handleSubmit} />
 
-            <Modal
+         
+            {/* <Modal
                 show={modalShow}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered>
@@ -260,7 +262,8 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
                         <button className='buttonGrey' onClick={() => setModalShow(false)}>Cancelar</button>
                     </div>
                 </Modal.Body>
-            </Modal>
+            </Modal> */}
+
         </div>
     )
 }

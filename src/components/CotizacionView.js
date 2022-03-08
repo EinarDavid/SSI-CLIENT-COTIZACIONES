@@ -41,15 +41,15 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
             <div className='containerDatos'>
                 <div className='Responsable'>
                     <p className='Title'>Responsable</p>
-                    <p className='Desctiption'>{responsible}</p>
+                    <p className='Description'>{responsible}</p>
                 </div>
                 <div className='Cliente'>
                     <p className='Title'>Cliente</p>
-                    <p className='Desctiption'>{client}</p>
+                    <p className='Description'>{client}</p>
                 </div>
                 <div className='Horas'>
                     <p className='Title'>Horas</p>
-                    <p className='Desctiption'>{Number(total_effort)}</p>
+                    <p className='Description'>{Number(total_effort)}</p>
                 </div>
             </div>
             {/* <div style={{ height: '15px' }}></div> */}

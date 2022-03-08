@@ -5,9 +5,11 @@ import { BusquedaNoExiste } from '../components/BusquedaNoExiste';
 import { Cotizacion } from '../components/Cotizacion';
 import { CotizacionView } from '../components/CotizacionView';
 import { CotizacionEdit } from '../components/CotizacionEdit';
+import PopupSinForm from '../components/PopupSinForm';
 
-import { Modal } from 'react-bootstrap';
+
 import './styles.css';
+
 
 export const BusquedaCotizacion = () => {
 
@@ -117,7 +119,7 @@ export const BusquedaCotizacion = () => {
                                         <button
                                             className='buttonSearch leftSpace'
                                             type='submit'
-                                        ><img src='./images/icons/Enviar.svg' width={30} alt='Enviar'></img>
+                                        ><img className='imageButton' src='./images/icons/Enviar.svg' width={30} alt='Enviar'></img>
                                         </button>
                                     </form>) :
                                     (
@@ -157,7 +159,8 @@ export const BusquedaCotizacion = () => {
                     </div>
                 </div>
             </div>
-            <Modal
+            <PopupSinForm trigger={modalShow} setTrigger={setModalShow} />
+            {/* <Modal
                 show={modalShow}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered>
@@ -171,7 +174,7 @@ export const BusquedaCotizacion = () => {
 
                     </div>
                 </Modal.Body>
-            </Modal>
+            </Modal> */}
         </>
     )
 }
