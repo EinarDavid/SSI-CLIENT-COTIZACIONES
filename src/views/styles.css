@@ -77,20 +77,20 @@ h1{
     border-radius: 26px;
 }
 
-.formInputSearch{
-    text-align: center;
-    height: 40px;
-}
-
-
 /* .formInputSearch{
     text-align: center;
-    width: 462px;
+    height: 40px;
+} */
+
+
+.formInputSearch{
+    text-align: center;
+    width: 475px;
     justify-content: space-between;
     display: flex;
     margin-left: auto;
     margin-right: auto;
-} */
+}
 
 .textInputSearch{
     background: #EFF4F6;
@@ -502,13 +502,20 @@ hr{
      justify-content: space-between;
      display: flex;
      width: 100%;
-     height: 32px;
+     height: 40px;
      padding-left: 32px;
      padding-right: 32px;
      padding-top: 0;
      padding-bottom: 0;
      margin: 0;
 
+ }
+ .containerRolHora{
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+    /* background-color: #0078b8; */
+    align-items: center;
  }
  .tableRole{
     /* background-color: #2781B8; */
@@ -676,14 +683,15 @@ hr{
  }
  
 .containerTableEdit{
-    background-color: #ffffff   ;
-    padding-top: 10px;
+    background-color: #ffffff;
+  
     padding-left: 0;
     padding-right: 0;
     padding-bottom: 0;
     height: 235px;
     overflow-y: scroll;
     margin: 0;
+    width: 100%;
 }
 
 /* Boton de DropDown */

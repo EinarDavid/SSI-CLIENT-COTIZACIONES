@@ -65,8 +65,10 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
                         return(
                             <div key={i}>
                                 <div className='containerTable' >
+                                    <div className='containerRolHora'>
                                     <p className='tableRole'>{det.role}</p>
                                     <p className='tableHours'>{Number(det.effort)}</p>
+                                    </div>
                                 </div>
                                 <div className='lineaTable'/>
                                 
