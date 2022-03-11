@@ -60,7 +60,7 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
                 </section>
             </div>
             <div className='containerTableEdit' >
-                {
+                { (detalle.message !== 'Task not found') ? (
                     detalle.map((det, i)=>{
                         return(
                             <div key={i}>
@@ -75,6 +75,10 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
                             </div>
                         )
                     })
+                ):(
+                    <p>No existe el detalle</p>
+                )
+                    
                 }
             </div>
             <div>

@@ -14,8 +14,9 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
     const [validar, setValidar] = useState(false);
     // const [datosActualizados, setDatosActualizados] = useState(setDatos[0]);
 
-
     const rolDropdown = rolData;
+
+    // var backupValueValid = 0;
 
     var sum = 0.00;
     detalle.map(({ effort }) => {
@@ -39,48 +40,46 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
     const addInputs = (e) => {
         e.preventDefault();
 
-        setDataDetalle([...detalle, { role: '', effort: 0 }]);
-        // console.log('Boton Precionado')
-        // setValidar(validInput());
+        setDataDetalle([...detalle, { role: '', effort: '' }]);
+
     }
     const handleChangeRol = (e, index) => {
         detalle[index].role = e.target.value;
         setDataDetalle([...detalle]);
 
-        // setValidar(validInput());
     }
     const handleChangeHora = (e, index) => {
-        // console.log('Horaaa', Number.parseFloat(e.target.value));
+        // console.log('Horaaa', parseFloat(e.target.value));
+        // console.log('Horaaa', Number.parseFloat(e.target));
 
-        if (isNaN(Number.parseFloat(e.target.value))) {
-            detalle[index].effort = 0;
+        if (isNaN(Number(e.target.value))) {
+            // console.log('OnChange---',e.target.backupValueValid);
+            detalle[index].effort = e.target.backupValueValid;
             setDataDetalle([...detalle]);
-            // console.log('Entro Aqui')
+            // console.log('Entro Aqui------------')
         } else {
-            detalle[index].effort = Number.parseFloat(e.target.value);
-
+            detalle[index].effort = (e.target.value);
+            // detalle[index].backupValue = (e.target.value);
             setDataDetalle([...detalle]);
         }
 
-        // setValidar(validInput());
+        // detalle[index].effort = e.target.value;
+        // setDataDetalle([...detalle]);
+
     }
     const handleRemoveInputRol = (position) => {
         setDataDetalle([...detalle.filter((_, index) => index !== position)]);
-        // setRol([...rol.horas.filter((_, inde) => inde != position)]);
-        // setValidar(validInput());
 
     }
     const valideKey = (e) => {
         var key = window.Event ? e.which : e.keyCode;
-        // console.log('Key', key)
+        // console.log('Key', e)
+        // backupValueValid = e.target.value;
 
-        if ((key < 48 || key > 57) && (key === 46))
+        e.target.backupValueValid = e.target.value;
+
+        if ((key < 48 || key > 57) && (key !== 8) && (key !== 46))
             e.preventDefault();
-
-        // if (key === 46){
-        //     // console.log('Key es 46',key)
-        //     e.target.value = e.target.value + '.';
-        // }
     }
 
     const validInput = () => {
@@ -156,13 +155,14 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
 
     useEffect(() => {
         setDataDetalle(setDetalle)
+
     }, [setDetalle])
 
     useEffect(() => {
         setValidar(validInput());
     }, [detalle])
 
-    console.log('Detalllee', detalle);
+    // console.log('Detalllee', detalle);
 
     return (
         <div>
@@ -226,7 +226,8 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
                                         type='text'
                                         name='esfuerzo'
                                         placeholder='Hora'
-                                        value={Number(det.effort)}
+                                        // value={Number(det.effort)}
+                                        value={det.effort}
                                         onChange={(e) => handleChangeHora(e, i)}
                                         onKeyPress={(e) => valideKey(e)}
 

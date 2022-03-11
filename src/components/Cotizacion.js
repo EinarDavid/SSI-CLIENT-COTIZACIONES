@@ -41,8 +41,8 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
     // Suma de la Horas
     var sum = 0.00;
     rol.map(({ effort }) => {
-        sum = sum + effort;
-        return (sum)
+        sum = sum + Number(effort);
+        return(sum)
     });
 
     let n = sum.toFixed(2);
@@ -50,7 +50,7 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
     const addInputs = (e) => {
         e.preventDefault();
 
-        setRol([...rol, { role: '', effort: 0 }]);
+        setRol([...rol, { role: '', effort: '' }]);
     }
 
     const handleChangeRol = (e, index) => {
@@ -60,22 +60,24 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
     const handleChangeHora = (e, index) => {
         // console.log('Horaaa', Number.parseFloat(e.target.value));
 
-        if (isNaN(Number.parseFloat(e.target.value))) {
-            rol[index].effort = 0;
+        if (isNaN(Number(e.target.value))) {
+            // console.log('OnChange---', e.target.backupValueValid);
+            rol[index].effort = e.target.backupValueValid;
             setRol([...rol]);
-            // console.log('Entro Aqui')
         } else {
-            rol[index].effort = Number.parseFloat(e.target.value);
+            rol[index].effort = (e.target.value);
             setRol([...rol]);
         }
     }
+ 
     const handleRemoveInputRol = (position) => {
         setRol([...rol.filter((_, index) => index !== position)]);
-        // setRol([...rol.horas.filter((_, inde) => inde != position)]);
+       
     }
     const valideKey = (e) => {
         var key = window.Event ? e.which : e.keyCode;
-        console.log('Key', e.target.value)
+        // console.log('Key', e.target.value)
+        e.target.backupValueValid = e.target.value;
 
         if ((key < 48 || key > 57) && (key !== 8) && (key !== 46))
             e.preventDefault();
@@ -191,7 +193,7 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
 
                                     <select
                                         className='inputCell inputRole'
-                                        value={rol.rol}
+                                        value={rol.role}
                                         onChange={(e) => handleChangeRol(e, index)}
                                         required
                                     // defaultValue={'Default'}
@@ -210,10 +212,10 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
                                         type='text'
                                         name='esfuerzo'
                                         placeholder='Hora'
-                                        value={rol.horas}
+                                        value={rol.effort}
                                         onChange={(e) => handleChangeHora(e, index)}
                                         onKeyPress={(e) => valideKey(e)}
-                                        defaultValue={0}
+                                        // defaultValue={0}
                                     //Agregar un Value
                                     ></input>
 
@@ -241,7 +243,7 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
                                             disabled
                                         >Guardar</button>)}
                                 </div>
-                                {Number(n) === Number.parseFloat(effort) ? <p>Total hrs: {Number(n)} <img src='./images/icons/check.svg' width={16} alt='Total correcto'></img></p> :
+                                {Number(n) === Number(effort) ? <p>Total hrs: {Number(n)} <img src='./images/icons/check.svg' width={16} alt='Total correcto'></img></p> :
                                     <p style={{ color: '#FF5574' }}>Total hrs: {Number(n)}</p>}
 
                             </div>

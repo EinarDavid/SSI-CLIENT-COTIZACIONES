@@ -36,7 +36,7 @@ export const BusquedaCotizacion = () => {
             const dataRol = await resRol.json();
             setRolData(dataRol);
 
-            
+
 
             const res = await fetch(`${urlServer}/ssiCotizacionVista/${number.toUpperCase()}`);
             const dataVista = await res.json();
@@ -58,6 +58,7 @@ export const BusquedaCotizacion = () => {
                     const resp2 = await fetch(url2);
                     const datadetalle = await resp2.json();
                     setDetalle(datadetalle)
+                   
                     // console.log('Entro a Handle Submit', datadetalle)
                 }
 
@@ -82,12 +83,9 @@ export const BusquedaCotizacion = () => {
             });
             const datadetalle = await resp2.json();
 
-            // console.log('Entro Aqui', JSON.stringify(datadetalle));
+            // console.log('Entro Aqui', (datadetalle));
             setDetalle(datadetalle)
-
         }
-
-
     }, [cotizaciones])
 
     // console.log('Cotizaciones', cotizaciones);
@@ -161,7 +159,7 @@ export const BusquedaCotizacion = () => {
                 </div>
             </div>
             <PopupSinForm trigger={modalShow} setTrigger={setModalShow} />
-            
+
         </>
     )
 }
