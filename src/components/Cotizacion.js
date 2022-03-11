@@ -9,7 +9,8 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
     // const { sale_order, effort, portafolio, state, login, project_code, partner_name } = setDatos[0];
 
 
-    const urlServer = 'http://192.168.5.101:4000';
+    // const urlServer = 'http://192.168.5.101:4000';
+    const urlServer = 'http://localhost:4000';
     // console.log('effff', setDatos[0]);
     const [rol, setRol] = useState([]);
     const [modalShow, setModalShow] = useState(false);
@@ -44,8 +45,7 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
         return (sum)
     });
 
-    // console.log('Sumaaa', sum);
-
+    let n = sum.toFixed(2);
 
     const addInputs = (e) => {
         e.preventDefault();
@@ -75,8 +75,9 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
     }
     const valideKey = (e) => {
         var key = window.Event ? e.which : e.keyCode;
+        console.log('Key', e.target.value)
 
-        if ((key < 48 || key > 57) && (key !== 8))
+        if ((key < 48 || key > 57) && (key !== 8) && (key !== 46))
             e.preventDefault();
     }
 
@@ -86,7 +87,7 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
             valid = false;
         }
         rol.forEach(det => {
-            if (det.effort === 0 || det.role === '' || sum !== Number(effort)) {
+            if (det.effort === 0 || det.role === '' || Number(n) !== Number(effort)) {
                 valid = false;
             }
         });
@@ -240,7 +241,8 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
                                             disabled
                                         >Guardar</button>)}
                                 </div>
-                                {sum === Number.parseFloat(effort) ? <p>Total hrs: {sum} <img src='./images/icons/check.svg' width={16} alt='Total correcto'></img></p> : <p style={{ color: '#FF5574' }}>Total hrs: {sum}</p>}
+                                {Number(n) === Number.parseFloat(effort) ? <p>Total hrs: {Number(n)} <img src='./images/icons/check.svg' width={16} alt='Total correcto'></img></p> :
+                                    <p style={{ color: '#FF5574' }}>Total hrs: {Number(n)}</p>}
 
                             </div>
                         </div>

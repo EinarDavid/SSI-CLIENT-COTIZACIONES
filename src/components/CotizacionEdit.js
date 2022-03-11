@@ -6,7 +6,8 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
 
 
 
-    const urlServer = 'http://192.168.5.101:4000';
+    // const urlServer = 'http://192.168.5.101:4000';
+    const urlServer = 'http://localhost:4000';
 
     const [detalle, setDataDetalle] = useState(setDetalle);
     const [modalShow, setModalShow] = useState(false);
@@ -21,6 +22,8 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
         sum = sum + Number(effort);
         return (sum)
     });
+
+    let n = sum.toFixed(2);
 
     const ConvertDate = (sqlDate) => {
         var sqlDateArr1 = sqlDate.split("-");
@@ -69,9 +72,15 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
     }
     const valideKey = (e) => {
         var key = window.Event ? e.which : e.keyCode;
+        // console.log('Key', key)
 
-        if ((key < 48 || key > 57) && (key !== 8))
+        if ((key < 48 || key > 57) && (key === 46))
             e.preventDefault();
+
+        // if (key === 46){
+        //     // console.log('Key es 46',key)
+        //     e.target.value = e.target.value + '.';
+        // }
     }
 
     const validInput = () => {
@@ -80,7 +89,7 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
             valid = false;
         }
         detalle.forEach(det => {
-            if (det.effort === 0 || det.role === '' || sum !== Number(cotizaciones[0].total_effort)) {
+            if (det.effort === 0 || det.role === '' || Number(n) !== Number(cotizaciones[0].total_effort)) {
                 valid = false;
             }
         });
@@ -153,7 +162,7 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
         setValidar(validInput());
     }, [detalle])
 
-    // console.log('Detalllee', detalle);
+    console.log('Detalllee', detalle);
 
     return (
         <div>
@@ -249,7 +258,8 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
                                         disabled
                                     >Guardar</button>)}
                             </div>
-                            {sum === Number.parseFloat(cotizaciones[0].total_effort) ? <p>Total hrs: {sum} <img src='./images/icons/check.svg' width={16} alt='Total correcto'></img></p> : <p style={{ color: '#FF5574' }}>Total hrs: {sum}</p>}
+                            {Number(n) === Number.parseFloat(cotizaciones[0].total_effort) ? <p>Total hrs: {Number(n)} <img src='./images/icons/check.svg' width={16} alt='Total correcto'></img></p> :
+                                <p style={{ color: '#FF5574' }}>Total hrs: {Number(n)}</p>}
 
                         </div>
                     </div>
