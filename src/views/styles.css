@@ -260,7 +260,7 @@ h1{
     margin: 0;
     padding: 0;
     /* width: 200px; */
-    width: 45%;
+    width: 48%;
     min-width: 40px;
     min-height: 40px;
     max-height: 40px;
@@ -337,6 +337,13 @@ h1{
     color: #FFFFFF;
  }
 
+/* CONTENEDOR DE BOTON */
+ .containerButtonRecargar{
+    box-sizing: border-box;
+    margin: 0;
+    padding-left: 32px;
+    padding-right: 32px;
+ }
 
 /* ------ESPACIOS Y ALINEACION-------- */
 
@@ -694,6 +701,24 @@ hr{
     margin: 0;
     width: 100%;
 }
+.containerAdvetencia{
+    width: 100%;
+     /* height: 40px; */
+     padding: 32px;
+     padding-top: 20px;
+     padding-bottom: 20px;
+     margin: 0;
+     box-sizing: border-box;
+     text-align: center;
+}
+.parrafoAdvertencia{
+    font-family: 'Roboto-Regular';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: center;
+}
 
 /* Boton de DropDown */
 .dropdownOption{
@@ -726,7 +751,7 @@ hr{
 .boton_salir_container{
     display: inline-block;
     /* margin-right: 16px; */
-    width: 45%;
+    width: 48%;
     }
 
 .texto_popup{

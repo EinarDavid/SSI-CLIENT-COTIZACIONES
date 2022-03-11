@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
+import PopupConfirmacion from './PopupConfirmacion';
 
 
 export const CotizacionView = ({ setDatos, setDetalle }) => {
+
+    const urlServer = 'http://192.168.5.101:4000';
+    // const urlServer = 'http://localhost:4000';
 
     // console.log('Detalleeee',setDetalle)
     // const [dataDetalle, setDataDetalle] = useState([]);
     const { id_order, client, responsible, date, total_effort } = setDatos[0];
     // const { id_order, client, responsible, date, status, total_effort, project_code } = setDatos[0];
+    const [modalShow, setModalShow] = useState(false)
    
     var detalle = [];
     detalle = setDetalle;
@@ -22,7 +27,29 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
 
         return (fecha);
     }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log('Boton precionado')
 
+        try {
+
+            const result = await fetch(`${urlServer}/ssiCotizacion/${id_order}`, {
+                method: 'DELETE',
+            });
+            if(result.ok){
+                console.log('Se borro correctamente')
+                document.location.reload();
+                
+            }
+
+            setModalShow(false);
+
+        } catch (error) {
+            console.log(error);
+        }
+        
+
+    }
     // console.log('Dateeee', ConvertDate(date));
 
     return (
@@ -76,7 +103,12 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
                         )
                     })
                 ):(
-                    <p>No existe el detalle</p>
+                        <div className='containerAdvetencia'>
+                            <img src='./images/busqueda.png' alt='Busqueda' width={40}/>
+                            <div style={{ height:'20px' }}></div>
+                            <p className='parrafoAdvertencia'>No se ha encontrado el detalle de esta cotización a pesar de que parece haber sido creado. Revisa la base de datos. Si crees que no hay problemas con la base de datos puedes restablecer esta cotización para volver a llenarla</p>
+                            <button className='buttonBlue' onClick={() => setModalShow(true)} >Restablecer</button>
+                        </div>
                 )
                     
                 }
@@ -92,7 +124,7 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
             </div>
             </div>
         </div>
-        
+        <PopupConfirmacion trigger={modalShow} setTrigger={setModalShow} handleSubmit={handleSubmit}/>
         </div>
     )
 }

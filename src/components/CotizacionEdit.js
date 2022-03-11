@@ -4,10 +4,10 @@ import Popup from './popup';
 
 export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizaciones }) => {
 
+    
 
-
-    // const urlServer = 'http://192.168.5.101:4000';
-    const urlServer = 'http://localhost:4000';
+    const urlServer = 'http://192.168.5.101:4000';
+    // const urlServer = 'http://localhost:4000';
 
     const [detalle, setDataDetalle] = useState(setDetalle);
     const [modalShow, setModalShow] = useState(false);
@@ -15,6 +15,15 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
     // const [datosActualizados, setDatosActualizados] = useState(setDatos[0]);
 
     const rolDropdown = rolData;
+
+    useEffect(() => {
+        setDataDetalle(setDetalle)
+
+    }, [setDetalle])
+
+    useEffect(() => {
+        setValidar(validInput());
+    }, [detalle])
 
     // var backupValueValid = 0;
 
@@ -153,14 +162,7 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
 
     }
 
-    useEffect(() => {
-        setDataDetalle(setDetalle)
-
-    }, [setDetalle])
-
-    useEffect(() => {
-        setValidar(validInput());
-    }, [detalle])
+    
 
     // console.log('Detalllee', detalle);
 
@@ -200,49 +202,52 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
                 </div>
                 <div className='containerTableEdit' >
                     {
-                        detalle.map((det, i) => {
-                            return (
-                                <div className='rowContainer' key={i} style={{ display: 'flex' }}>
-
-                                    <select
-                                        className='inputCell inputRole'
-                                        value={det.role}
-                                        onChange={(e) => handleChangeRol(e, i)}
-                                        required
-                                    // defaultValue={'Default'}
-                                    >
-                                        <option value='Default' hidden >--Rol no definido--</option>
-                                        {
-                                            rolDropdown.map(({ role, id_role }) => (
-                                                <option key={id_role}
-                                                    value={role}
-
-                                                >{role}</option>
-                                            ))
-                                        }
-                                    </select>
-                                    <input
-                                        className='inputCell inputHours'
-                                        type='text'
-                                        name='esfuerzo'
-                                        placeholder='Hora'
-                                        // value={Number(det.effort)}
-                                        value={det.effort}
-                                        onChange={(e) => handleChangeHora(e, i)}
-                                        onKeyPress={(e) => valideKey(e)}
-
-                                    ></input>
-                                    <button
-                                        className='buttonRemoveRow'
-                                        style={{ marginLeft: '5px' }}
-                                        onClick={() => { handleRemoveInputRol(i) }}
-                                    >-</button>
-
-                                    {/* <div className='lineaTable' /> */}
-
-                                </div>
-                            )
-                        })
+                        (detalle.message !== 'Task not found') ? (
+                            detalle.map((det, i) => {
+                                return (
+                                    <div className='rowContainer' key={i} style={{ display: 'flex' }}>
+    
+                                        <select
+                                            className='inputCell inputRole'
+                                            value={det.role}
+                                            onChange={(e) => handleChangeRol(e, i)}
+                                            required
+                                        // defaultValue={'Default'}
+                                        >
+                                            <option value='Default' hidden >--Rol no definido--</option>
+                                            {
+                                                rolDropdown.map(({ role, id_role }) => (
+                                                    <option key={id_role}
+                                                        value={role}
+    
+                                                    >{role}</option>
+                                                ))
+                                            }
+                                        </select>
+                                        <input
+                                            className='inputCell inputHours'
+                                            type='text'
+                                            name='esfuerzo'
+                                            placeholder='Hora'
+                                            // value={Number(det.effort)}
+                                            value={det.effort}
+                                            onChange={(e) => handleChangeHora(e, i)}
+                                            onKeyPress={(e) => valideKey(e)}
+    
+                                        ></input>
+                                        <button
+                                            className='buttonRemoveRow'
+                                            style={{ marginLeft: '5px' }}
+                                            onClick={() => { handleRemoveInputRol(i) }}
+                                        >-</button>
+    
+                                        {/* <div className='lineaTable' /> */}
+    
+                                    </div>
+                                )
+                            })
+                        ):
+                        (<p>Detalle no existe</p>)
                     }
                     <div className='buttonAddContainer'>
                         <button onClick={addInputs} className='buttonAdd'>Click aquí para añadir un nuevo rol</button>
