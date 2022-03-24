@@ -37,7 +37,7 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
                 method: 'DELETE',
             });
             if(result.ok){
-                console.log('Se borro correctamente')
+                // console.log('Se borro correctamente')
                 document.location.reload();
                 
             }
