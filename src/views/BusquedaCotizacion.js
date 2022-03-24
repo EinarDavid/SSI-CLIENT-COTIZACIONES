@@ -110,7 +110,7 @@ export const BusquedaCotizacion = () => {
 
                     <div className='TitleHeader'>
                         <h1>Cotizaciones</h1>
-                        <img src='./images/Salamanca.svg' alt='Busqueda' width={130} />
+                        <img className='imageButton' src='./images/Salamanca.svg' alt='LogoSSI' width={130} />
                     </div>
                     <div style={{ height: '15px' }}></div>
                     <div className='card-white'>
