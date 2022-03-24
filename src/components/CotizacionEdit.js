@@ -6,8 +6,8 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
 
     
 
-    // const urlServer = 'http://192.168.5.101:4000';
-    const urlServer = 'http://localhost:4000';
+    const urlServer = 'http://192.168.5.101:4000';
+    // const urlServer = 'http://localhost:4000';
 
     const [detalle, setDataDetalle] = useState(setDetalle);
     const [modalShow, setModalShow] = useState(false);

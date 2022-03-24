@@ -4,8 +4,8 @@ import PopupConfirmacion from './PopupConfirmacion';
 
 export const CotizacionView = ({ setDatos, setDetalle }) => {
 
-    // const urlServer = 'http://192.168.5.101:4000';
-    const urlServer = 'http://localhost:4000';
+    const urlServer = 'http://192.168.5.101:4000';
+    // const urlServer = 'http://localhost:4000';
 
     // console.log('Detalleeee',setDetalle)
     // const [dataDetalle, setDataDetalle] = useState([]);

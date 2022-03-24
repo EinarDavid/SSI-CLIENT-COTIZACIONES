@@ -23,8 +23,8 @@ export const BusquedaCotizacion = () => {
     // const [searchEnable, setSearchEnable] = useState(false);
 
 
-    // const urlServer = 'http://192.168.5.101:4000';
-    const urlServer = 'http://localhost:4000';
+    const urlServer = 'http://192.168.5.101:4000';
+    // const urlServer = 'http://localhost:4000';
     // console.log(number.toUpperCase());
 
     const handleSubmit = async (e) => {

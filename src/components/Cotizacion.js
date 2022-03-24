@@ -9,8 +9,8 @@ export const Cotizacion = ({ setDatos, rolData, setCotizaciones, cotizaciones, d
     // const { sale_order, effort, portafolio, state, login, project_code, partner_name } = setDatos[0];
 
 
-    // const urlServer = 'http://192.168.5.101:4000';
-    const urlServer = 'http://localhost:4000';
+    const urlServer = 'http://192.168.5.101:4000';
+    // const urlServer = 'http://localhost:4000';
 
     // console.log('effff', setDatos[0]);
     const [rol, setRol] = useState([]);
