@@ -23,8 +23,8 @@ export const BusquedaCotizacion = () => {
     // const [searchEnable, setSearchEnable] = useState(false);
 
 
-    const urlServer = 'http://192.168.5.101:4000';
-    // const urlServer = 'http://localhost:4000';
+    // const urlServer = 'http://192.168.5.101:4000';
+    const urlServer = 'http://localhost:4000';
     // console.log(number.toUpperCase());
 
     const handleSubmit = async (e) => {
@@ -32,19 +32,19 @@ export const BusquedaCotizacion = () => {
         // console.log(number)
 
         try {
-            
+
             if (number.trim().length > 1) {
                 const resRol = await fetch(`${urlServer}/ssiCotizacionRol`);
                 const dataRol = await resRol.json();
                 setRolData(dataRol);
-    
-    
-    
+
+
+
                 const res = await fetch(`${urlServer}/ssiCotizacionVista/${number.toUpperCase()}`);
                 const dataVista = await res.json();
                 // console.log('DataVistaaaa', dataVista)
                 setCotizacionesVista(dataVista);
-    
+
                 if (dataVista[0].state !== 'null') {
                     // getCotizacion(dataVista[0].sale_order);
                     const url = `${urlServer}/ssiCotizacion/${dataVista[0].sale_order}`
@@ -52,20 +52,20 @@ export const BusquedaCotizacion = () => {
                     const datacotizacion = await resp.json();
                     // console.log('DataCooot', datacotizacion)
                     setCotizaciones(datacotizacion);
-    
-    
+
+
                     if (datacotizacion[0].status !== 'null') {
-    
+
                         const url2 = `${urlServer}/ssiCotizacionDetalle/${datacotizacion[0].id_quotation}`
                         const resp2 = await fetch(url2);
                         const datadetalle = await resp2.json();
                         setDetalle(datadetalle)
-    
+
                         // console.log('Entro a Handle Submit', datadetalle)
                     }
-    
+
                 }
-    
+
             }
             setNumber('');
 
@@ -89,13 +89,17 @@ export const BusquedaCotizacion = () => {
             });
             const datadetalle = await resp2.json();
 
-            // console.log('Entro Aqui', (datadetalle));
+            // console.log('-----------------Entro Aqui', (datadetalle));
             setDetalle(datadetalle)
+        } else{
+            const detallevacio = [];
+            // console.log('+++++++++Entro al else');
+            setDetalle(detallevacio);
         }
     }, [cotizaciones])
 
     // console.log('Cotizaciones', cotizaciones);
-    // console.log('Detalle', detalle.message);
+    // console.log('Detalle', detalle);
     // console.log('Stado Padre', cotizaciones[0].status);
 
 
@@ -103,12 +107,17 @@ export const BusquedaCotizacion = () => {
         <>
             <div className='card_container_parent'>
                 <div className='card_container'>
-                    <h1>Cotizaciones</h1>
+
+                    <div className='TitleHeader'>
+                        <h1>Cotizaciones</h1>
+                        <img src='./images/Salamanca.svg' alt='Busqueda' width={130} />
+                    </div>
+                    <div style={{ height: '15px' }}></div>
                     <div className='card-white'>
                         <div style={{ height: '32px' }}></div>
                         <div >
                             {
-                                (cotizaciones[0].status !== 'null' && cotizaciones[0].status !== 'EDIT' || detalle.message === 'Task not found') ?
+                                ((cotizaciones[0].status !== 'EDIT' && cotizaciones[0].status !== 'null') ||  detalle.message === 'Task not found') ?
                                     (<form className='formInputSearch' onSubmit={handleSubmit}>
                                         <input
                                             className='textInputSearch'

@@ -38,6 +38,16 @@
     overflow-y: scroll;
 
 }
+
+.TitleHeader{
+    /* background-color: #20C197; */
+    justify-content: space-between;
+    /* width: 95%; */
+    display: flex;
+    padding: 0 10px;
+    /* margin: auto; */
+}
+
 h1{
     font-family: 'Roboto-Bold';
     font-style: normal;
@@ -60,10 +70,12 @@ h1{
     height: 100vh;
     background-color: #EFF4F6;
     display: flex;
+   ;
 }
 
 .card_container{
-    margin: auto auto;    
+    margin: auto auto;   
+    /* text-align: center;  */
 }
 
 .card-white{

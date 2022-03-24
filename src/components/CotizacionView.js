@@ -4,8 +4,8 @@ import PopupConfirmacion from './PopupConfirmacion';
 
 export const CotizacionView = ({ setDatos, setDetalle }) => {
 
-    const urlServer = 'http://192.168.5.101:4000';
-    // const urlServer = 'http://localhost:4000';
+    // const urlServer = 'http://192.168.5.101:4000';
+    const urlServer = 'http://localhost:4000';
 
     // console.log('Detalleeee',setDetalle)
     // const [dataDetalle, setDataDetalle] = useState([]);
@@ -29,7 +29,7 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Boton precionado')
+        // console.log('Boton precionado')
 
         try {
 
@@ -76,7 +76,7 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
                 </div>
                 <div className='Horas'>
                     <p className='Title'>Horas</p>
-                    <p className='Description'>{Number(total_effort)}</p>
+                    <p className='Description'>{(total_effort)}</p>
                 </div>
             </div>
             {/* <div style={{ height: '15px' }}></div> */}
@@ -94,7 +94,7 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
                                 <div className='containerTable' >
                                     <div className='containerRolHora'>
                                     <p className='tableRole'>{det.role}</p>
-                                    <p className='tableHours'>{Number(det.effort)}</p>
+                                    <p className='tableHours'>{(det.effort)}</p>
                                     </div>
                                 </div>
                                 <div className='lineaTable'/>
@@ -119,7 +119,7 @@ export const CotizacionView = ({ setDatos, setDetalle }) => {
                 
                 <div className='footerContainer'>
                     {/* <div><button>Icon</button></div> */}
-                    <p className='footerHoras'>Total hrs: {Number(total_effort)} <img src='./images/icons/check.svg' width={16} style={{marginLeft:'5px'}} alt='Total correcto'/></p>
+                    <p className='footerHoras'>Total hrs: {(total_effort)} <img src='./images/icons/check.svg' width={16} style={{marginLeft:'5px'}} alt='Total correcto'/></p>
                 </div>
             </div>
             </div>

@@ -6,8 +6,8 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
 
     
 
-    const urlServer = 'http://192.168.5.101:4000';
-    // const urlServer = 'http://localhost:4000';
+    // const urlServer = 'http://192.168.5.101:4000';
+    const urlServer = 'http://localhost:4000';
 
     const [detalle, setDataDetalle] = useState(setDetalle);
     const [modalShow, setModalShow] = useState(false);
@@ -190,7 +190,7 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
                     </div>
                     <div className='Horas'>
                         <p className='Title'>Horas</p>
-                        <p className='Description'>{Number(cotizaciones[0].total_effort)}</p>
+                        <p className='Description'>{(cotizaciones[0].total_effort)}</p>
                     </div>
                 </div>
                 {/* <div style={{ height: '15px' }}></div> */}
@@ -264,8 +264,8 @@ export const CotizacionEdit = ({ setDetalle, rolData, cotizaciones, setCotizacio
                                         disabled
                                     >Guardar</button>)}
                             </div>
-                            {Number(n) === Number.parseFloat(cotizaciones[0].total_effort) ? <p>Total hrs: {Number(n)} <img src='./images/icons/check.svg' width={16} alt='Total correcto'></img></p> :
-                                <p style={{ color: '#FF5574' }}>Total hrs: {Number(n)}</p>}
+                            {Number(n) === Number.parseFloat(cotizaciones[0].total_effort) ? <p>Total hrs: {(n)} <img src='./images/icons/check.svg' width={16} alt='Total correcto'></img></p> :
+                                <p style={{ color: '#FF5574' }}>Total hrs: {(n)}</p>}
 
                         </div>
                     </div>
